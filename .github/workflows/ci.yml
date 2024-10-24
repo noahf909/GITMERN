@@ -29,7 +29,7 @@ jobs:
 
       # Step 4: Install backend dependencies (Node/Express)
       - name: Install backend dependencies
-        working-directory: ./MERN
+        working-directory: ./
         run: npm install
 
       # Step 5: Deploy to DigitalOcean Droplet
