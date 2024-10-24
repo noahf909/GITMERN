@@ -1,0 +1,45 @@
+name: CI/CD Pipeline for MERN
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.18.0'
+
+      # Step 3: Install frontend dependencies (React in AAB)
+      - name: Install frontend dependencies
+        working-directory: ./AAB
+        run: |
+          npm install
+          npm run build
+
+      # Step 4: Install backend dependencies (Node/Express)
+      - name: Install backend dependencies
+        working-directory: ./MERN
+        run: npm install
+
+      # Step 5: Deploy to DigitalOcean Droplet
+      - name: Deploy to DigitalOcean
+        run: |
+          ssh root@147.182.221.68 << 'EOF'
+            cd /home/MERN
+            git pull origin main
+            docker-compose down
+            docker-compose up -d --build
+          EOF
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
