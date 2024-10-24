@@ -42,8 +42,10 @@ jobs:
           ssh -o StrictHostKeyChecking=no root@147.182.221.68 << 'EOF'
             cd /home/MERN
             git pull origin main
-            docker-compose down
-            docker-compose up -d --build
+            pm2 stop all || true  # Stop the previous instance if running (if you're using PM2)
+            npm install            # Install dependencies
+            npm run build          # If applicable (for frontend)
+            pm2 start server.js    # Start your Node.js server using PM2 or another process manager
           EOF
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
