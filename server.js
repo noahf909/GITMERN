@@ -25,17 +25,22 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 
 // Routes
-const customerRoutes = require('./api/customers');
-const productRoutes = require('./api/products');
-const loginRoutes = require('./api/login')
+const customerRoutes = require('./routes/customerRoutes.js');
+const productRoutes = require('./routes/productRoutes.js');
+const orderRoutes = require('./routes/orderRoutes.js');
+
 
 // Use routes ()
 /*
 "Hey, whenever someone visits a web address that starts with /api/___, use the rules or functions I’ve defined in customerRoutes (customers.js) to decide what to do next."
+"Don't do this^, I reordered the endpoints to be MVC compliant."
+"If you want to get an endpoint just check the routes folder."
+"If you want to see the underlying logic, check the controllers folder."
+"Also, the models folder has the schema for the database."
 */
-app.use('/api/customers', customerRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/login', loginRoutes); 
+app.use("/api/customers", customerRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Start the Node + Express server on port 5000
 const PORT = process.env.PORT || 5000;
