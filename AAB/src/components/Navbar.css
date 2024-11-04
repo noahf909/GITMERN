@@ -1,0 +1,33 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+}
+.nav{
+    background-color: rgb(130, 130, 127);
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:2rem;
+    padding: 0 1rem;
+}
+.nav ul{
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    height:100%;
+    display:flex;
+    padding:.4rem;
+    align-items: stretch;
+}
+
+.home{
+    font-size: 2rem;
+}
