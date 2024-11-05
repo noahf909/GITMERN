@@ -1,0 +1,67 @@
+/* Container for the entire product detail section */
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Image gallery container */
+.image-gallery {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Thumbnails container */
+.thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Thumbnail images */
+.thumbnails img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+/* Highlight active thumbnail */
+.thumbnails img.active {
+    border-color: #000;
+}
+
+/* Main image display */
+.main-image img {
+    width: 100%;
+    max-width: 500px;
+    object-fit: cover;
+}
+
+/* Product information container */
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Product name styling */
+.product-info h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Product price styling */
+.product-info .price {
+    font-size: 1.5rem;
+    color: #e60023;
+    margin-bottom: 10px;
+}
+
+/* Product description styling */
+.product-info .description {
+    font-size: 1rem;
+    line-height: 1.5;
+}
