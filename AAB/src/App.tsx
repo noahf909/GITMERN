@@ -6,10 +6,12 @@ import ProductDetail from './pages/ProductDetail'; // New detail page component
 import About from './pages/About';
 import Cart from './pages/Cart';  
 import './App.css'
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
     <Router>
+      <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
