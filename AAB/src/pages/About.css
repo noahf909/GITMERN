@@ -16,35 +16,51 @@ body {
     padding: 0 15px;
   }
   
-  .row {
-    display: flex;
-    flex-wrap: wrap;
+  .row1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+    gap: 20px; 
+    justify-items: center; 
   }
-  
+  .row2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);    
+    gap: 20px; 
+    justify-items: center; 
+  }
+
   /* Section Title */
   .section-title {
     font-size: 2.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: #333;
     text-align: center;
   }
   
   .section-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
     color: #333;
     text-align: center;
   }
   
   /* Team Item */
   .team-item {
-    background: #f9f9f9;
+    background: #dbdbdbb9;
     border-radius: 8px;
-    padding: 20px;
+    padding: 5px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0 15px 30px;
     transition: transform 0.2s;
+    height: 450px;
+    width: 100%;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
   }
   
   .team-item:hover {
@@ -56,24 +72,33 @@ body {
     width: 200px;
     height: 200px;
     border-radius: 50%; /* Circular image */
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     border: 4px solid #9ed1d7; /* Border color */
   }
   
   /* Team Info */
   .team-info {
-    margin-top: 15px;
-    padding: 15px;
-  }
+    margin-top: 5px; 
+    padding: 5px;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
   
   .team-info h3 {
-    font-size: 1.5rem;
-    margin: 10px 0;
+    font-size: 1.2rem;
+    margin: 5px 0;
   }
   
   .team-info p {
     color: #888;
-    margin: 5px 0;
+    margin: 2px 0;
+    word-wrap: break-word;
+
   }
   
   /* Social Icons */
@@ -98,4 +123,14 @@ body {
   .team-icon a:hover {
     color: #333; /* Color on hover */
   }
-  
+
+
+@media (max-width: 1100px) {
+    /* Stacking everything into one column on very small screens */
+    .row1 {
+        grid-template-columns: 1fr; /* One item per row on small screens */
+    }
+    .row2 {
+        grid-template-columns: 1fr; /* One item per row on small screens */
+    }
+}
