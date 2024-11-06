@@ -1,7 +1,7 @@
 /* Products grid layout */
 .products-list {
     display: grid; /* Creates a grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 3fr)); /* Makes responsive columns, each card will be at least 200px wide */
+    grid-template-columns: repeat(3, minmax(300px, 3fr)); /* Makes responsive columns, each card will be at least 200px wide */
     gap: 20px; /* Adds space between each product card */
     padding: 20px; /* Adds padding around the entire grid */
     /* To increase or decrease the minimum width of each card, change the 200px value in minmax(200px, 1fr) */

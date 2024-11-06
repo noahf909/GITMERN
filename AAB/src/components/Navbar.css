@@ -3,14 +3,22 @@
 }
 body{
     margin:0;
+    padding-top: 60px;
 }
 .nav{
     background-color: rgb(130, 130, 127);
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     gap:2rem;
     padding: 0 1rem;
+    
+    position: fixed; /* keep navar fixed at the top of the page even when scrolling */
+    width: 100vw; /* have navbar span entire width of viewport */
+    top: 0; /* position navbar at very top of the viewport */
+    left: 0; /* position navbar at very left of the viewport */ 
+    z-index: 1000; /* ensure navbar stays on top of other elements on the page*/
+    overflow: hidden;
 }
 .nav ul{
     list-style: none;
@@ -30,4 +38,24 @@ body{
 
 .home{
     font-size: 2rem;
+}
+
+/* Styling for the cart link */
+.cart-link {
+    position: relative;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Style for the cart count badge */
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8em;
 }

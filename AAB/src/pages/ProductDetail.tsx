@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react';
 // Import the CSS file for styling
 import './ProductDetail.css'; // Import the CSS file
 
+// Import useCart for accessing cart context
+import { useCart } from '../context/CartContext'; 
+
 
 // Define the Product interface to specify the structure of a product object
 interface Product {
@@ -16,6 +19,11 @@ interface Product {
     description: string;
     frontImageUrl: string;
     backImageUrl: string;
+    sizes: {
+          size: string,
+          quantity: number,
+          _id: string
+    }[],
 }
 
 
@@ -30,13 +38,17 @@ const ProductDetail = () => {
     // Create a state variable for the main image to display in the gallery
     const [mainImage, setMainImage] = useState<string>('');
 
+    // track selected size 
+    const [selectedSize, setSelectedSize] = useState<string>(''); 
+
+    // access addToCart from CartContext
+    const { addToCart } = useCart(); // Access addToCart from CartContext
+
     // useEffect to fetch product details when the component loads or when the ID changes
     useEffect(() => {
-        
         // Define an async function to fetch product data from the server
         const fetchProduct = async () => {
         try {
-            
             // Send a request to fetch product details using the product ID
             const response = await fetch(`/api/products/${id}`);
             
@@ -48,7 +60,6 @@ const ProductDetail = () => {
 
             // Set the main image to the front image of the product initially
             setMainImage(data.frontImageUrl);
-            
         } catch (error) {
             // Log any errors that occur during fetching
             console.error("Error fetching product:", error);
@@ -59,14 +70,27 @@ const ProductDetail = () => {
         fetchProduct();
     }, [id]); // Dependency array with ID to re-run effect if ID changes
 
+    const handleAddToCart = () => {
+        
+        const itemToAdd = {
+            productId: product!._id,
+            name: product!.name,
+            price: product!.price,
+            size: selectedSize,
+            quantity: 1
+        };
+        console.log('Item to add:', itemToAdd);
+        addToCart(itemToAdd); 
+    };
+
+
     // Display a loading message if the product data is not yet loaded
     if (!product) return <p>Loading...</p>;
 
-    return (
+     return (
         <div className="product-detail">
             {/* Image gallery with thumbnails and main image display */}
             <div className="image-gallery">
-                
                 <div className="thumbnails">
                     {/* Thumbnail for front image with click event to set it as the main image */}
                     <img
@@ -75,7 +99,6 @@ const ProductDetail = () => {
                         onClick={() => setMainImage(product.frontImageUrl)}
                         className={mainImage === product.frontImageUrl ? 'active' : ''}
                     />
-                    
                     {/* Thumbnail for back image with click event to set it as the main image */}
                     <img
                         src={product.backImageUrl}
@@ -85,13 +108,11 @@ const ProductDetail = () => {
                     />
                 </div>
                 <div className="main-image">
-                    
                     {/* Main image display based on selected thumbnail */}
                     <img src={mainImage} alt={product.name} />
                 </div>
             </div>
             <div className="product-info">
-                
                 {/* Display product name */}
                 <h1>{product.name}</h1>
                 
@@ -101,7 +122,27 @@ const ProductDetail = () => {
                 {/* Display product description */}
                 <p className="description">{product.description}</p>
                 
-                {/* Add more product details as needed */}
+                {/* Size selection dropdown */}
+                <label htmlFor="size-select" className="size-label">Select Size</label>
+                <select
+                    id="size-select"
+                    className="size-dropdown"
+                    value={selectedSize}
+                    onChange={(e) => setSelectedSize(e.target.value)}
+                >
+                    <option value="">--Choose a size--</option>
+                    {product.sizes.map((sizeOption) => (
+                        <option key={sizeOption._id} value={sizeOption.size}>
+                            {sizeOption.size} (available)
+                        </option>
+                    ))}
+                </select>
+
+                {/* Add to Cart button */}
+                <button onClick={handleAddToCart} disabled={!selectedSize}>
+                    Add to Cart
+                </button>
+
             </div>
         </div>
     );
