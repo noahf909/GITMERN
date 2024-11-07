@@ -8,6 +8,7 @@ import About from './pages/About';
 import Cart from './pages/Cart';  
 import { CartProvider } from './context/CartContext'; 
 import './App.css'
+import Register from './pages/Register';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/products/:id" element={<ProductDetail />} /> {/* Dynamic route */}
           <Route path="/About" element={<About />} />
           <Route path="/Cart" element={<Cart />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
       </Router>
     </CartProvider>
