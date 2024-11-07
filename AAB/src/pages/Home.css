@@ -50,29 +50,73 @@
     border-color: #000000;
   }
 
-/* About style */
-  
+
+/* about section */
 .about-section {
-    width: 80%; /* Same width as the blue box */
-    margin-top: 30px; /* Add space between the blue box and the About section */
+    width: 80%; 
+    margin-top: 30px;
     padding: 20px;
-    margin-left: auto; /* Center the About section horizontally */
-    margin-right: auto; /* Center the About section horizontally */
+    margin-left: auto;
+    margin-right: auto;
   }
   
 .about-title {
     font-family: 'Manrope', sans-serif;
     font-size: 32px;
-    color: #333; /* Dark color for the title */
+    color: #333; 
     font-weight: 700;
     text-align: center;
-    margin-bottom: 15px; /* Space below the title */
+    margin-bottom: 15px; 
   }
   
 .about-text {
     font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    color: #555; /* Lighter text color for the paragraph */
+    font-size: 17px;
+    color: #555;
     line-height: 1.6;
-    text-align: left;
+    text-align: center;
+  }
+
+  .features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 100px;
+  }
+  
+  .feature {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    padding: 20px;
+    
+  }
+
+  .feature-icon-wrapper {
+    display: inline-flex;  /* Make it an inline element so it doesn't take up the full width */
+    width: 120px;  /* Set width of the circle */
+    height: 120px; /* Set height to match width for a perfect circle */
+    background-color: #9ed1d7; /* Blue circle */
+    border-radius: 50%; /* Make it a circle */
+    display: flex; /* Use flexbox to center the icon inside the circle */
+    justify-content: center; /* Horizontally center the icon */
+    align-items: center; /* Vertically center the icon */
+    margin-bottom: 10px; /* Space between the icon and the title */
+  }
+  
+  .feature-icon {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .feature h3 {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
   }
