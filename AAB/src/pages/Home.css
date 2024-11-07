@@ -1,0 +1,78 @@
+.blue-box {
+    background-color: #9ed1d7;
+    border-radius: 15px;
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  
+/* website title*/
+  .title {
+    font-family: 'Manrope', sans-serif;
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .box-stats{
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+/* search bar styling */
+.search-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex; 
+    justify-content: flex-start; 
+  }
+  
+.search-input {
+    background-color: white; 
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #343434;
+    border-radius: 5px;
+    outline: none;
+    color: #333;
+  }
+  
+.search-input:focus {
+    border-color: #000000;
+  }
+
+/* About style */
+  
+.about-section {
+    width: 80%; /* Same width as the blue box */
+    margin-top: 30px; /* Add space between the blue box and the About section */
+    padding: 20px;
+    margin-left: auto; /* Center the About section horizontally */
+    margin-right: auto; /* Center the About section horizontally */
+  }
+  
+.about-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 32px;
+    color: #333; /* Dark color for the title */
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px; /* Space below the title */
+  }
+  
+.about-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #555; /* Lighter text color for the paragraph */
+    line-height: 1.6;
+    text-align: left;
+  }
