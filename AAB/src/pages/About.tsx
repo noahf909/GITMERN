@@ -5,6 +5,8 @@ import noah from '../assets/noah.jpg';
 import randy from '../assets/randy.jpg';
 import ashtoncutiepatootie from '../assets/ashtoncutiepatootie.jpg';
 import nick from '../assets/nick.jpg';
+import jacob from '../assets/jacob.jpg';
+
 const About = () => {
     const AboutDes = "Average At Best is an athletic clothing brand founded by a friend of Noah's";
     return (
@@ -23,7 +25,7 @@ const About = () => {
                   <div className="team-info">
                     <p>Front-end/Mobile Dev</p>
                     <p>Created About & Home Page</p>
-                    <p>Add links to git linkedin etc?</p>
+                    <a href="https://www.linkedin.com/in/katelynsoups/" target="_blank" rel="noopener noreferrer">Linkedin</a>
                   </div>
               </div>
             </div>
@@ -80,14 +82,14 @@ const About = () => {
 
             <div className="col-sm-6 col-md-4">
               <div className = "team-item">
-                <img src={santoscutie} alt="Headshot" />
+                <img src={jacob} alt="Headshot" />
                 <h3>Jacob Adams</h3>
                 <div className="team-info">
-                  <p>API</p>
+                  <p>Mobile Developer</p>
                   <p></p>
                   <p>Created Mobile App</p>
                   <p></p>
-                  <a href="https://www.linkedin.com/in/santos-solanet" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                  <a href="https://www.linkedin.com/in/jacobka1219/" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 </div>
               </div>
             </div>

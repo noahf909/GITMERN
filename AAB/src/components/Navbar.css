@@ -1,61 +1,87 @@
-*{
+* {
     box-sizing: border-box;
 }
-body{
-    margin:0;
+
+body {
+    margin: 0;
     padding-top: 60px;
 }
-.nav{
+
+.nav {
     background-color: rgb(130, 130, 127);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap:2rem;
+    gap: 2rem;
     padding: 0 1rem;
-    
-    position: fixed; /* keep navar fixed at the top of the page even when scrolling */
-    width: 100vw; /* have navbar span entire width of viewport */
-    top: 0; /* position navbar at very top of the viewport */
-    left: 0; /* position navbar at very left of the viewport */ 
-    z-index: 1000; /* ensure navbar stays on top of other elements on the page*/
+    position: fixed; /* Fixed position at top */
+    width: 100vw; /* Full width */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Keep navbar on top */
     overflow: hidden;
 }
-.nav ul{
+
+.nav ul {
     list-style: none;
-    padding: 0px;
+    padding: 0;
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .nav a {
     color: white;
     text-decoration: none;
-    height:100%;
-    display:flex;
-    padding:.4rem;
-    align-items: stretch;
+    padding: .4rem;
+    line-height: 1.5; 
+    display: flex;
+    align-items: center;
 }
 
-.home{
+.products-link{
+    font-size: 1.2rem;
+}
+.about-link{
+    font-size: 1.2rem;
+}
+
+.home {
     font-size: 2rem;
 }
 
-/* Styling for the cart link */
 .cart-link {
     position: relative;
-    color: #333;
-    text-decoration: none;
+    display: flex;
+    align-items: center; 
+}
+
+.cart-icon{
+    width: 30px; /* Adjust icon size */
+    height: 30px; /* Same as above */
+    vertical-align: middle;
 }
 
 /* Style for the cart count badge */
 .cart-count {
     position: absolute;
-    top: -8px;
-    right: -10px;
+    top: -2px;
+    right: -2px;
     background-color: red;
     color: white;
     font-weight: bold;
     border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8em;
+    padding: 2px 4px;
+    font-size: 0.6em;
+}
+
+.user-link {
+    position: relative;
+    display: flex;
+    align-items: center; 
+}
+
+.user-icon{
+    width: 25px; /* Adjust icon size */
+    height: 30px; /* Same as above */
+    vertical-align: middle;
 }
