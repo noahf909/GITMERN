@@ -35,7 +35,7 @@ const About = () => {
                 <img src={noah} alt="Headshot" />
                 <h3>Noah Fuhrman</h3>
                   <div className="team-info">
-                    <p>Front-end</p>
+                    <p>Project Manager/Front-end</p>
                     <p>MERN Set Up & Created Products Page</p>
                     <a href="https://www.linkedin.com/in/noah-f-893a78237/" target="_blank" rel="noopener noreferrer">Linkedin</a>
                   </div>
@@ -99,7 +99,7 @@ const About = () => {
                 <img src={nick} alt="Headshot" />
                 <h3>Nick Piazza</h3>
                 <div className="team-info">
-                  <p>Project Manager</p>
+                  <p>Front-end</p>
                   <p></p>
                   <p>Created Cart Page</p>
                   <p></p>

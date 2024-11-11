@@ -1,60 +1,58 @@
 import './Cart.css';
-
-// import the cart context 
 import { useCart } from '../context/CartContext';
 import { useState } from 'react';
 
 function Cart() {
-  
-  // Access cart items from CartContext
-  const { cartItems, removeFromCart } = useCart(); 
-
-  //explain. 
-  const [removeQuantities, setRemoveQuantities] = useState<{ [key: string]: number }>({});
-  console.log('Current cart items in Cart page:', cartItems); // Log the cart items
+  const { cartItems, addToCart, removeFromCart } = useCart();
 
   // Calculate the subtotal by summing up the price * quantity for each item
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // Update the selected quantity for a particular item
-  const handleQuantityChange = (productId: string, size: string, value: number) => {
-    setRemoveQuantities((prev) => ({
-      ...prev,
-      [`${productId}-${size}`]: value
-    }));
+  // Handle quantity changes directly in the cart, syncing with cart data
+  const handleQuantityChange = (productId: string, size: string, value: string) => {
+    const numValue = Number(value);
+
+    // Check if the value is a valid number within the valid range
+    if (value.trim() === '' || (value.trim() !== '' && !isNaN(numValue) && numValue >= 1 && numValue <= 99)) {
+      // Find the item in the cart
+      const item = cartItems.find((i) => i.productId === productId && i.size === size);
+
+      if (item) {
+        const updatedItem = { ...item, quantity: numValue || 1 }; // Update the item quantity
+        removeFromCart(productId, size, item.quantity); // Remove the old quantity from cart
+        addToCart(updatedItem); // Add the updated item with the new quantity
+      }
+    }
   };
 
   return (
     <div className="cart-container">
       <h1 className="cart-heading">Your Shopping Cart</h1>
 
-      {/* Check if there are items in the cart */}
       {cartItems.length > 0 ? (
         <>
-          {/* Display each cart item */}
           <div className="cart-items">
             {cartItems.map((item) => (
               <div key={item.productId} className="cart-item">
                 <p>{item.name} (Size: {item.size})</p>
                 <p>Price: ${item.price.toFixed(2)}</p>
-                <p>Quantity: {item.quantity}</p>
 
-                 
-                 {/* Dropdown or input for selecting quantity to remove */}
-                 <label>
-                  Quantity to remove:
+                {/* Quantity input field */}
+                <p>
+                  Quantity:{' '}
                   <input
                     type="number"
                     min="1"
-                    max={item.quantity}
-                    value={removeQuantities[`${item.productId}-${item.size}`] || 1}
-                    onChange={(e) => handleQuantityChange(item.productId, item.size, Number(e.target.value))}
+                    max="99"
+                    value={item.quantity}
+                    onChange={(e) => handleQuantityChange(item.productId, item.size, e.target.value)}
+                    className="quantity-input"
                   />
-                </label>
+                </p>
 
-                <button 
-                  className="remove-btn" 
-                  onClick={() => removeFromCart(item.productId, item.size, removeQuantities[`${item.productId}-${item.size}`] || 1)}
+                <button
+                  className="remove-btn"
+                  onClick={() => removeFromCart(item.productId, item.size, 1)} // Default to remove one item
                 >
                   Remove
                 </button>
@@ -62,7 +60,6 @@ function Cart() {
             ))}
           </div>
 
-          {/* Display subtotal and total */}
           <div className="price-details">
             <div>Subtotal: ${subtotal.toFixed(2)}</div>
             <div className="total-price">Total: ${subtotal.toFixed(2)}</div>
@@ -71,7 +68,7 @@ function Cart() {
           <button className="checkout-btn">Proceed to Checkout</button>
         </>
       ) : (
-        <p>Your cart is empty.</p> // Message if the cart is empty
+        <p>Your cart is empty.</p>
       )}
     </div>
   );
