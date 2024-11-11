@@ -25,6 +25,18 @@ function Cart() {
     }
   };
 
+  // Function to remove a single item from the cart
+  const handleRemoveItem = (productId: string, size: string) => {
+    removeFromCart(productId, size, -1); // Remove the item completely (use -1 to signify full removal)
+  };
+
+  // Function to remove all items from the cart
+  const handleDeleteAll = () => {
+    cartItems.forEach((item) => {
+      removeFromCart(item.productId, item.size, -1); // Removes all items
+    });
+  };
+
   return (
     <div className="cart-container">
       <h1 className="cart-heading">Your Shopping Cart</h1>
@@ -34,6 +46,14 @@ function Cart() {
           <div className="cart-items">
             {cartItems.map((item) => (
               <div key={item.productId} className="cart-item">
+                {/* Remove button */}
+                <span
+                  className="remove-item-text"
+                  onClick={() => handleRemoveItem(item.productId, item.size)}
+                >
+                  Remove
+                </span>
+
                 <p>{item.name} (Size: {item.size})</p>
                 <p>Price: ${item.price.toFixed(2)}</p>
 
@@ -49,13 +69,6 @@ function Cart() {
                     className="quantity-input"
                   />
                 </p>
-
-                <button
-                  className="remove-btn"
-                  onClick={() => removeFromCart(item.productId, item.size, 1)} // Default to remove one item
-                >
-                  Remove
-                </button>
               </div>
             ))}
           </div>
@@ -64,6 +77,11 @@ function Cart() {
             <div>Subtotal: ${subtotal.toFixed(2)}</div>
             <div className="total-price">Total: ${subtotal.toFixed(2)}</div>
           </div>
+
+          {/* Delete All button */}
+          <button className="remove-btn delete-all-btn" onClick={handleDeleteAll}>
+            Delete All
+          </button>
 
           <button className="checkout-btn">Proceed to Checkout</button>
         </>

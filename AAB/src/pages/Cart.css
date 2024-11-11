@@ -37,6 +37,27 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+/* Remove button (text style in top-right corner) */
+.remove-item-text {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;        
+  border: none;            
+  color: #e74c3c;          
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s;
+  padding: 0;              
+  margin: 0;              
+}
+
+.remove-item-text:hover {
+  color: #c0392b;          
 }
 
 .cart-item p {
@@ -60,22 +81,6 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   text-align: center;
-}
-
-/* Remove button styling */
-.remove-btn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-}
-
-.remove-btn:hover {
-  background-color: #c0392b;
 }
 
 /* Price details styling */
@@ -106,4 +111,23 @@
 
 .checkout-btn:hover {
   background-color: #555;
+}
+
+/* Delete All button styling */
+.delete-all-btn {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  color: white;
+  background-color: #e74c3c;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-all-btn:hover {
+  background-color: #c0392b;
 }

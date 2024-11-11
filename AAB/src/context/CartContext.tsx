@@ -29,35 +29,43 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
-    // Updated addToCart function
     const addToCart = (item: CartItem) => {
-        setCartItems((prevItems) => {
-            const existingItemIndex = prevItems.findIndex(
-                (i) => i.productId === item.productId && i.size === item.size
+    setCartItems((prevItems) => {
+        const existingItemIndex = prevItems.findIndex(
+            (i) => i.productId === item.productId && i.size === item.size
+        );
+
+        let updatedItems;
+        if (existingItemIndex >= 0) {
+            // Update the quantity of the existing item at the same index
+            updatedItems = [...prevItems]; // Create a shallow copy of the array
+            updatedItems[existingItemIndex] = { 
+                ...updatedItems[existingItemIndex], 
+                quantity: updatedItems[existingItemIndex].quantity + item.quantity 
+            };
+        } else {
+            // Add the new item to the cart if it's not already present
+            updatedItems = [...prevItems, item];
+        }
+
+        // Save the updated cart to local storage
+        localStorage.setItem('cart', JSON.stringify(updatedItems));
+        return updatedItems;
+    });
+};
+
+const removeFromCart = (productId: string, size: string, quantityToRemove: number) => {
+    setCartItems((prevItems) => {
+        let updatedItems;
+
+        if (quantityToRemove === -1) {
+            // Completely remove the item if quantityToRemove is -1
+            updatedItems = prevItems.filter(
+                (item) => !(item.productId === productId && item.size === size)
             );
-
-            let updatedItems;
-            if (existingItemIndex >= 0) {
-                // Update the quantity of the existing item
-                updatedItems = prevItems.map((i, index) =>
-                    index === existingItemIndex
-                        ? { ...i, quantity: i.quantity + item.quantity } // Correctly update quantity
-                        : i
-                );
-            } else {
-                // Add the new item to the cart if it's not already present
-                updatedItems = [...prevItems, item];
-            }
-
-            // Save the updated cart to local storage
-            localStorage.setItem('cart', JSON.stringify(updatedItems));
-            return updatedItems;
-        });
-    };
-
-    const removeFromCart = (productId: string, size: string, quantityToRemove: number) => {
-        setCartItems((prevItems) => {
-            const updatedItems = prevItems.reduce((acc, item) => {
+        } else {
+            // Otherwise, reduce the quantity as before
+            updatedItems = prevItems.reduce((acc, item) => {
                 if (item.productId === productId && item.size === size) {
                     const newQuantity = item.quantity - quantityToRemove;
                     if (newQuantity > 0) {
@@ -69,11 +77,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
                 }
                 return acc;
             }, [] as CartItem[]);
+        }
 
-            localStorage.setItem('cart', JSON.stringify(updatedItems));
-            return updatedItems;
-        });
-    };
+        localStorage.setItem('cart', JSON.stringify(updatedItems));
+        return updatedItems;
+    });
+};
 
     // Cart count is the total number of items
     const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
