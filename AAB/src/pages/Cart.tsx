@@ -11,14 +11,12 @@ function Cart() {
   // Handle quantity changes directly in the cart, syncing with cart data
   const handleQuantityChange = (productId: string, size: string, value: string) => {
     const numValue = Number(value);
+    const item = cartItems.find((i) => i.productId === productId && i.size === size);
 
-    // Check if the value is a valid number within the valid range
-    if (value.trim() === '' || (value.trim() !== '' && !isNaN(numValue) && numValue >= 1 && numValue <= 99)) {
-      // Find the item in the cart
-      const item = cartItems.find((i) => i.productId === productId && i.size === size);
-
+    // Handle the case when the value is valid
+    if (value.trim() === '' || (!isNaN(numValue) && numValue >= 1 && numValue <= 99)) {
       if (item) {
-        const updatedItem = { ...item, quantity: numValue || 1 }; // Update the item quantity
+        const updatedItem = { ...item, quantity: numValue || 1 }; // Use 1 as fallback for empty input
         removeFromCart(productId, size, item.quantity); // Remove the old quantity from cart
         addToCart(updatedItem); // Add the updated item with the new quantity
       }
@@ -44,33 +42,61 @@ function Cart() {
       {cartItems.length > 0 ? (
         <>
           <div className="cart-items">
-            {cartItems.map((item) => (
-              <div key={item.productId} className="cart-item">
-                {/* Remove button */}
-                <span
-                  className="remove-item-text"
-                  onClick={() => handleRemoveItem(item.productId, item.size)}
-                >
-                  Remove
-                </span>
+            {cartItems.map((item) => {
+              // State to handle the local input value of the quantity
+              const [localQuantity, setLocalQuantity] = useState(item.quantity.toString());
 
-                <p>{item.name} (Size: {item.size})</p>
-                <p>Price: ${item.price.toFixed(2)}</p>
+              const handleLocalQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+                const value = e.target.value;
+                // Update the local quantity without affecting global cart state
+                setLocalQuantity(value);
+              };
 
-                {/* Quantity input field */}
-                <p>
-                  Quantity:{' '}
-                  <input
-                    type="number"
-                    min="1"
-                    max="99"
-                    value={item.quantity}
-                    onChange={(e) => handleQuantityChange(item.productId, item.size, e.target.value)}
-                    className="quantity-input"
-                  />
-                </p>
-              </div>
-            ))}
+              const handleBlur = () => {
+                // Validate and commit the change when input loses focus or the user presses Enter
+                const numValue = Number(localQuantity);
+                if (numValue >= 1 && numValue <= 99) {
+                  // Update global cart state only if valid
+                  handleQuantityChange(item.productId, item.size, localQuantity);
+                } else {
+                  // Revert to last valid quantity if invalid input
+                  setLocalQuantity(item.quantity.toString());
+                }
+              };
+
+              return (
+                <div key={item.productId} className="cart-item">
+                  {/* Remove button */}
+                  <span
+                    className="remove-item-text"
+                    onClick={() => handleRemoveItem(item.productId, item.size)}
+                  >
+                    Remove
+                  </span>
+
+                  <p>{item.name} (Size: {item.size})</p>
+                  <p>Price: ${item.price.toFixed(2)}</p>
+
+                  {/* Quantity input field */}
+                  <p>
+                    Quantity:{' '}
+                    <input
+                      type="number"
+                      min="1"
+                      max="99"
+                      value={localQuantity}
+                      onChange={handleLocalQuantityChange}
+                      onBlur={handleBlur} // Commit changes when input loses focus
+                      onKeyDown={(e) => {
+                        // Optional: Allow "Enter" to commit the change
+                        if (e.key === 'Enter') handleBlur();
+                      }}
+                      className="quantity-input"
+                    />
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           <div className="price-details">
