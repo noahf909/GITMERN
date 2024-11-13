@@ -2,27 +2,33 @@ import './Cart.css';
 import { useCart } from '../context/CartContext';
 
 function Cart() {
-  const { cartItems, addToCart, removeFromCart } = useCart();
+  // Access `cartItems`, `addToCart`, `removeFromCart`, and `setCartItems` from context
+  const { cartItems, addToCart, removeFromCart, setCartItems } = useCart();
 
-  // Calculate the subtotal and total item count by adding up the price * quantity for each item
+  // Calculate the subtotal and total item count by iterating through the cart items
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const totalItems = cartItems.reduce((count, item) => count + item.quantity, 0);
 
-  // Function to update the quantity of an item in the cart
-  // This function first removes the item entirely and then adds it back with the new quantity.
+  // Function to update the quantity of an item in the cart without changing its position
   const handleQuantityChange = (productId: string, size: string, value: string) => {
-    const numValue = Number(value); // Convert the input value to a number
-    const item = cartItems.find((i) => i.productId === productId && i.size === size);
+    const numValue = Number(value);
+    if (isNaN(numValue) || numValue < 1) return; // Ignore invalid quantities
 
-    if (item && !isNaN(numValue) && numValue >= 1) {
-      removeFromCart(productId, size, item.quantity); // Remove the current quantity
-      addToCart({ ...item, quantity: numValue }); // Add the updated quantity
-    }
+    // Update only the specific item in the cart without changing the order
+    setCartItems((prevItems) => {
+      return prevItems.map((item) => {
+        // Only update the quantity of the matching item; keep others unchanged
+        if (item.productId === productId && item.size === size) {
+          return { ...item, quantity: numValue };
+        }
+        return item;
+      });
+    });
   };
 
-  // Function to completely remove a specific item from the cart
+  // Function to remove a single item from the cart
   const handleRemoveItem = (productId: string, size: string) => {
-    removeFromCart(productId, size, -1); // -1 is used to signify full removal
+    removeFromCart(productId, size, -1); // -1 signifies complete removal of the item
   };
 
   // Function to remove all items from the cart
@@ -36,16 +42,13 @@ function Cart() {
     <div className="cart-container">
       <h1 className="cart-heading">Your Shopping Cart</h1>
 
+      {/* Check if there are items in the cart */}
       {cartItems && cartItems.length > 0 ? (
         <>
           <div className="cart-items">
-            {/* 
-              Loop through each item in the cart to render its details.
-              Instead of using useState for a local quantity, we use item.quantity directly.
-              This avoids React errors from having dynamic useState calls inside the loop.
-            */}
+            {/* Iterate over each item in the cart and display it */}
             {cartItems.map((item) => {
-              // Function to handle changes in the quantity input field for each item
+              // Function to handle quantity change for the specific item
               const handleLocalQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                 handleQuantityChange(item.productId, item.size, e.target.value);
               };
@@ -66,7 +69,7 @@ function Cart() {
                       type="number"
                       min="1"
                       max="99"
-                      value={item.quantity} // Use item.quantity directly from cartItems
+                      value={item.quantity} // Use the quantity from cartItems directly
                       onChange={handleLocalQuantityChange} // Update global cart quantity on change
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') handleLocalQuantityChange(e); // Allow Enter key to commit change
@@ -79,6 +82,7 @@ function Cart() {
             })}
           </div>
 
+          {/* Display subtotal, total items, and checkout options */}
           <div className="price-details">
             <div>Subtotal: ${subtotal.toFixed(2)}</div>
             <div>Total Items: {totalItems}</div>

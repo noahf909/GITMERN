@@ -13,8 +13,9 @@ interface CartItem {
 interface CartContextType {
     cartItems: CartItem[]; // array of items currently in the cart 
     addToCart: (item: CartItem) => void; // function to add an item to the cart 
-    removeFromCart: (productId: string, size: string, quantityToRemove: number) => void; //function to remove item from cart
-    cartCount: number; //total count of items in the cart 
+    removeFromCart: (productId: string, size: string, quantityToRemove: number) => void; // function to remove item from cart
+    setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>; // function to set the entire cart (for quantity updates)
+    cartCount: number; // total count of items in the cart 
 }
 
 // Create the CartContext with an initial value of undefined 
@@ -30,51 +31,51 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
 
     const addToCart = (item: CartItem) => {
-    setCartItems((prevItems) => {
-        const existingItemIndex = prevItems.findIndex(
-            (i) => i.productId === item.productId && i.size === item.size
-        );
+        setCartItems((prevItems) => {
+            const existingItemIndex = prevItems.findIndex(
+                (i) => i.productId === item.productId && i.size === item.size
+            );
 
-        let updatedItems;
-        if (existingItemIndex >= 0) {
-            // Update the quantity of the existing item at the same index
-            updatedItems = [...prevItems]; // Create a shallow copy of the array
-            updatedItems[existingItemIndex] = { 
-                ...updatedItems[existingItemIndex], 
-                quantity: updatedItems[existingItemIndex].quantity + item.quantity 
-            };
-        } else {
-            // Add the new item to the cart if it's not already present
-            updatedItems = [...prevItems, item];
-        }
-
-        // Save the updated cart to local storage
-        localStorage.setItem('cart', JSON.stringify(updatedItems));
-        return updatedItems;
-    });
-};
-
-const removeFromCart = (productId: string, size: string, quantityToRemove: number) => {
-    setCartItems((prevItems) => {
-        const updatedItems = prevItems.reduce((acc, item) => {
-            if (item.productId === productId && item.size === size) {
-                const newQuantity = item.quantity - quantityToRemove;
-                if (newQuantity > 0 && quantityToRemove !== -1) {
-                    // If quantity is positive after reduction, add it back to the cart
-                    acc.push({ ...item, quantity: newQuantity });
-                }
-                // If newQuantity is zero or quantityToRemove is -1, item is removed
+            let updatedItems;
+            if (existingItemIndex >= 0) {
+                // Update the quantity of the existing item at the same index
+                updatedItems = [...prevItems]; // Create a shallow copy of the array
+                updatedItems[existingItemIndex] = { 
+                    ...updatedItems[existingItemIndex], 
+                    quantity: updatedItems[existingItemIndex].quantity + item.quantity 
+                };
             } else {
-                // Add items that don’t match the productId and size to the cart
-                acc.push(item);
+                // Add the new item to the cart if it's not already present
+                updatedItems = [...prevItems, item];
             }
-            return acc;
-        }, [] as CartItem[]);
 
-        localStorage.setItem('cart', JSON.stringify(updatedItems));
-        return updatedItems; // Ensure updatedItems is returned to update state
-    });
-};
+            // Save the updated cart to local storage
+            localStorage.setItem('cart', JSON.stringify(updatedItems));
+            return updatedItems;
+        });
+    };
+
+    const removeFromCart = (productId: string, size: string, quantityToRemove: number) => {
+        setCartItems((prevItems) => {
+            const updatedItems = prevItems.reduce((acc, item) => {
+                if (item.productId === productId && item.size === size) {
+                    const newQuantity = item.quantity - quantityToRemove;
+                    if (newQuantity > 0 && quantityToRemove !== -1) {
+                        // If quantity is positive after reduction, add it back to the cart
+                        acc.push({ ...item, quantity: newQuantity });
+                    }
+                    // If newQuantity is zero or quantityToRemove is -1, item is removed
+                } else {
+                    // Add items that don’t match the productId and size to the cart
+                    acc.push(item);
+                }
+                return acc;
+            }, [] as CartItem[]);
+
+            localStorage.setItem('cart', JSON.stringify(updatedItems));
+            return updatedItems; // Ensure updatedItems is returned to update state
+        });
+    };
 
     // Cart count is the total number of items
     const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
@@ -85,7 +86,7 @@ const removeFromCart = (productId: string, size: string, quantityToRemove: numbe
     }, [cartItems]);
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, cartCount }}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, setCartItems, cartCount }}>
             {children}
         </CartContext.Provider>
     );
