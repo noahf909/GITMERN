@@ -17,7 +17,7 @@ const About = () => {
               <p className = "section-subtitle">{AboutDes}</p>
           </div>
           
-          <div className = "row1">
+          <div className = "row">
             <div className="col-sm-6 col--4">
               <div className = "team-item">
                 <img src={katelyn} alt="Headshot" />
@@ -53,9 +53,19 @@ const About = () => {
                   </div>
               </div>
             </div>
-          </div>
-          <div className = "row2">
-
+            <div className="col-sm-6 col-md-4">
+              <div className = "team-item">
+                <img src={nick} alt="Headshot" />
+                <h3>Nick Piazza</h3>
+                <div className="team-info">
+                  <p>Front-end</p>
+                  <p></p>
+                  <p>Created Cart Page</p>
+                  <p></p>
+                  <a href="https://www.linkedin.com/in/nickpiazza26/" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                </div>
+              </div>
+            </div>
             <div className="col-sm-6 col-md-4">
               <div className = "team-item">
                 <img src={santoscutie} alt="Headshot" />
