@@ -56,31 +56,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 const removeFromCart = (productId: string, size: string, quantityToRemove: number) => {
     setCartItems((prevItems) => {
-        let updatedItems;
-
-        if (quantityToRemove === -1) {
-            // Completely remove the item if quantityToRemove is -1
-            updatedItems = prevItems.filter(
-                (item) => !(item.productId === productId && item.size === size)
-            );
-        } else {
-            // Otherwise, reduce the quantity as before
-            updatedItems = prevItems.reduce((acc, item) => {
-                if (item.productId === productId && item.size === size) {
-                    const newQuantity = item.quantity - quantityToRemove;
-                    if (newQuantity > 0) {
-                        acc.push({ ...item, quantity: newQuantity });
-                    }
-                    // If newQuantity <= 0, we don’t push the item to acc, effectively removing it.
-                } else {
-                    acc.push(item);
+        const updatedItems = prevItems.reduce((acc, item) => {
+            if (item.productId === productId && item.size === size) {
+                const newQuantity = item.quantity - quantityToRemove;
+                if (newQuantity > 0 && quantityToRemove !== -1) {
+                    // If quantity is positive after reduction, add it back to the cart
+                    acc.push({ ...item, quantity: newQuantity });
                 }
-                return acc;
-            }, [] as CartItem[]);
-        }
+                // If newQuantity is zero or quantityToRemove is -1, item is removed
+            } else {
+                // Add items that don’t match the productId and size to the cart
+                acc.push(item);
+            }
+            return acc;
+        }, [] as CartItem[]);
 
         localStorage.setItem('cart', JSON.stringify(updatedItems));
-        return updatedItems;
+        return updatedItems; // Ensure updatedItems is returned to update state
     });
 };
 
