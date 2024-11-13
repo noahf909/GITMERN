@@ -6,6 +6,7 @@ import randy from '../assets/randy.jpg';
 import ashtoncutiepatootie from '../assets/ashtoncutiepatootie.jpg';
 import nick from '../assets/nick.jpg';
 import jacob from '../assets/jacob.jpg';
+import joshua from '../assets/joshua.jpg'; 
 
 const About = () => {
     const AboutDes = "Average At Best is an athletic clothing brand founded by a friend of Noah's";
@@ -106,14 +107,13 @@ const About = () => {
 
             <div className="col-sm-6 col-md-4">
               <div className = "team-item">
-                <img src={nick} alt="Headshot" />
-                <h3>Nick Piazza</h3>
+                <img src={joshua} alt="Headshot" />
+                <h3>Joshua Orlian</h3>
                 <div className="team-info">
-                  <p>Front-end</p>
+                  <p>Founder</p>
                   <p></p>
-                  <p>Created Cart Page</p>
-                  <p></p>
-                  <a href="https://www.linkedin.com/in/nickpiazza26/" target="_blank" rel="noopener noreferrer">Linkedin</a>
+                  <p>Created the Brand</p>
+                  <a href="https://www.linkedin.com/in/joshorlian/" target="_blank" rel="noopener noreferrer">Linkedin</a>
                 </div>
               </div>
             </div>
