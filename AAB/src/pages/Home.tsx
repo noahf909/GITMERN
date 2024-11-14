@@ -1,5 +1,8 @@
 import './Home.css';
 
+// React imports
+import { useNavigate } from 'react-router-dom';
+
 //icons for about section
 import compost from '../assets/icons/compost.png'; 
 import globe from '../assets/icons/globe.png';
@@ -11,6 +14,9 @@ import womens from '../assets/womens.jpg';
 import accessories from '../assets/accessories.jpg';
 
 const Home = () => {
+    // useNavigate hook to navigate to different pages while maintaining state
+    const navigate = useNavigate();
+    
   return (
     <>
       {/* title */}
@@ -22,6 +28,15 @@ const Home = () => {
         <div className="search-container">
           <input 
             type="text" 
+            onKeyDown={(e) => { 
+                if (e.key === 'Enter') {
+                    navigate("/products", {
+                        state: {
+                            search: e.currentTarget.value
+                        }
+                    });
+                }
+            }}      
             className="search-input" 
             placeholder="Search for products..." 
           />
