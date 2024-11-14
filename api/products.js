@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product'); // Assuming you have a Product model
-const cors = require('cors');
 
 // POST - Add a new product
 router.post('/', async (req, res) => {
