@@ -48,17 +48,23 @@
 
   .cart-summary {
     position: fixed;
-    top: 10vh; /* Position from the top of the viewport, adjust as needed */
+    top: 10vh; /* Position from the top of the viewport */
     right: 5vw; /* Position from the right of the viewport */
     width: 25vw; /* Set a responsive width */
-    max-width: 350px; /* Set a maximum width to prevent it from becoming too wide */
-    max-height: 2000px;
+    max-width: 350px; /* Set a maximum width */
+    height: 70vh; /* Set a fixed height for scrolling */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Ensure it stays on top of other elements */
+    overflow-y: auto; /* Enable vertical scrolling */
   }
+
+  /* hide scrollbar */
+  .cart-summary::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome, Safari, and Edge */
+}
   
   .cart-item-image {
     width: 60px;
