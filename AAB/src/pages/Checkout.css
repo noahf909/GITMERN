@@ -1,14 +1,17 @@
 .checkout-container {
-    max-width: 40vw;
-    max-height: 90vh;
-    margin: 0 auto;
-    margin-left: 20vh;
-    margin-top: 5vh;
+    position: fixed;
+    top: 10vh; /* Distance from the top of the viewport */
+    left: 5vw; /* Distance from the left side of the viewport */
+    width: 40vw; /* Set a responsive width */
+    max-width: 600px; /* Limit the maximum width */
+    height: 80vh; /* Set a responsive height */
     padding: 20px;
     background-color: #f8f8f8;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    overflow-y: auto; /* Adds scrolling if content overflows */
+    z-index: 1000; /* Ensure it stays above other elements */
   }
   
   .checkout-container h2 {
@@ -16,7 +19,7 @@
   }
   
   .checkout-section {
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
     text-align: left;
   }
   
@@ -44,13 +47,17 @@
   }
 
   .cart-summary {
-    width: 30%;
+    position: fixed;
+    top: 10vh; /* Position from the top of the viewport, adjust as needed */
+    right: 5vw; /* Position from the right of the viewport */
+    width: 25vw; /* Set a responsive width */
+    max-width: 350px; /* Set a maximum width to prevent it from becoming too wide */
+    max-height: 2000px;
     padding: 20px;
-    margin-top: -55vh;
-    margin-left: 60vw;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it stays on top of other elements */
   }
   
   .cart-item-image {
