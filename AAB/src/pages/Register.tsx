@@ -5,7 +5,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 interface FormData {
     name: string;
     email: string;
-    address: string;
+    //address: string;
     phone: string;
     password: string;
     confirmPassword: string; // New field for confirming password
@@ -15,7 +15,7 @@ const SignUp: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
-        address: '',
+        //address: '',
         phone: '',
         password: '',
         confirmPassword: '' // Initialize confirmPassword
@@ -115,7 +115,8 @@ const SignUp: React.FC = () => {
                             onChange={handleChange}
                             required
                         />
-                    </div>
+                    </div> 
+                    {/* 
                     <div>
                         <label htmlFor="address">Address</label>
                         <input
@@ -127,6 +128,7 @@ const SignUp: React.FC = () => {
                             required
                         />
                     </div>
+                    */}
                     <div>
                         <label htmlFor="phone">Phone Number</label>
                         <input

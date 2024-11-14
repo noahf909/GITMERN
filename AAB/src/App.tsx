@@ -9,6 +9,7 @@ import Cart from './pages/Cart';
 import { CartProvider } from './context/CartContext'; 
 import './App.css'
 import Register from './pages/Register';
+import Checkout from './pages/Checkout'; 
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/About" element={<About />} />
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Checkout" element={<Checkout />} /> 
         </Routes>
       </Router>
     </CartProvider>

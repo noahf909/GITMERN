@@ -77,6 +77,7 @@ const ProductDetail = () => {
             name: product!.name,
             price: product!.price,
             size: selectedSize,
+            frontImageUrl: product!.frontImageUrl,
             quantity: 1
         };
         console.log('Item to add:', itemToAdd);
