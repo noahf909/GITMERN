@@ -44,6 +44,8 @@ const ProductDetail = () => {
     // access addToCart from CartContext
     const { addToCart } = useCart(); // Access addToCart from CartContext
 
+    const [quantity, setQuantity] = useState<number>(1);
+
     // useEffect to fetch product details when the component loads or when the ID changes
     useEffect(() => {
         // Define an async function to fetch product data from the server
@@ -77,7 +79,7 @@ const ProductDetail = () => {
             name: product!.name,
             price: product!.price,
             size: selectedSize,
-            quantity: 1
+            quantity: quantity
         };
         console.log('Item to add:', itemToAdd);
         addToCart(itemToAdd); 
@@ -133,7 +135,7 @@ const ProductDetail = () => {
                     <option value="">--Choose a size--</option>
                     {product.sizes.map((sizeOption) => (
                         <option key={sizeOption._id} value={sizeOption.size}>
-                            {sizeOption.size} (available)
+                            {sizeOption.size} ({sizeOption.quantity > 0 ? "available" : "out of stock"})
                         </option>
                     ))}
                 </select>
@@ -142,6 +144,18 @@ const ProductDetail = () => {
                 <button onClick={handleAddToCart} disabled={!selectedSize}>
                     Add to Cart
                 </button>
+
+                <p>
+                    Quantity:{' '}
+                    <input
+                        type="number"
+                        min="1"
+                        max="99"
+                        value={quantity}
+                        onChange={(e) => setQuantity(parseInt(e.target.value))}
+                        className="quantity-input"
+                    />
+                </p>
 
             </div>
         </div>
