@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 
 function Cart() {
   // Access `cartItems`, `addToCart`, `removeFromCart`, and `setCartItems` from context
-  const { cartItems, addToCart, removeFromCart, setCartItems } = useCart();
+  const { cartItems, removeFromCart, setCartItems } = useCart();
 
   // Calculate the subtotal and total item count by iterating through the cart items
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -71,9 +71,6 @@ function Cart() {
                       max="99"
                       value={item.quantity} // Use the quantity from cartItems directly
                       onChange={handleLocalQuantityChange} // Update global cart quantity on change
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleLocalQuantityChange(e); // Allow Enter key to commit change
-                      }}
                       className="quantity-input"
                     />
                   </p>
