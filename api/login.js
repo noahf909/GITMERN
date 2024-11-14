@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Login = require('../models/Login'); // Assuming you have a Login model
+const cors = require('cors');
 
 // POST - Add a new customer
 router.post('/', async (req, res) => {
