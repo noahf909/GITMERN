@@ -5,7 +5,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 interface FormData {
     name: string;
     email: string;
-    address: string;
+    //address: string;
     phone: string;
     password: string;
     confirmPassword: string; // New field for confirming password
@@ -15,7 +15,7 @@ const SignUp: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
-        address: '',
+        //address: '',
         phone: '',
         password: '',
         confirmPassword: '' // Initialize confirmPassword
@@ -23,20 +23,7 @@ const SignUp: React.FC = () => {
 
     const [error, setError] = useState<string>('');
     const [success, setSuccess] = useState<boolean>(false);
-    // Function to format the phone number
-    const formatPhoneNumber = (phone: string): string => {
-        // Remove non-digit characters
-        const cleaned = phone.replace(/\D/g, '');
-        
-        // Check if the cleaned number has 10 digits
-        if (cleaned.length === 10) {
-        // Format as xxx-xxx-xxxx
-        return cleaned.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
-        }
-        
-        // If not 10 digits, return the cleaned number (or handle the error)
-        return phone;
-    };
+
     // Handle form input changes
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
@@ -53,13 +40,11 @@ const SignUp: React.FC = () => {
             setSuccess(false);
             return;
         }
-        const formattedPhone = formatPhoneNumber(formData.phone);
         // Create a new object without confirmPassword
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { confirmPassword, ...dataToSend } = formData;
-
-        // Make sure to include the formatted phone number in the dataToSend object
-        dataToSend.phone = formattedPhone;
+        dataToSend.email.trim();
+        dataToSend.email.toLowerCase();
 
         try {
             const response = await fetch('/api/customers', {
@@ -77,8 +62,16 @@ const SignUp: React.FC = () => {
 
             const data = await response.json();
             console.log('Account created successfully:', data);
-            setSuccess(true);
             setError(''); // Clear any previous error
+            setSuccess(true);
+            
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                password: '',
+                confirmPassword: ''
+            });
 
         } catch (err) {
             console.error('Error creating account:', err);
@@ -92,7 +85,7 @@ const SignUp: React.FC = () => {
             <div className="signup-form">
                 <h2>Create an Account</h2>
                 {error && <p className="error">{error}</p>}
-                {success && <p className="success">Account created successfully!</p>}
+                {success && <p className="success">Account created successfully! Please Sign In!</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="name">Full Name</label>
@@ -115,7 +108,8 @@ const SignUp: React.FC = () => {
                             onChange={handleChange}
                             required
                         />
-                    </div>
+                    </div> 
+                    {/* 
                     <div>
                         <label htmlFor="address">Address</label>
                         <input
@@ -127,15 +121,17 @@ const SignUp: React.FC = () => {
                             required
                         />
                     </div>
+                    */}
                     <div>
-                        <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phone">Phone Number</label>
                         <input
                             type="tel"
                             id="phone"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            pattern="^(\+?\d{1,4}[\s\-]?)?(\(?\d{3}\)?[\s\-]?)?\d{3}[\s\-]?\d{4}$"
+                            pattern="^\d{3}-\d{3}-\d{4}$" // Matching format xxx-xxx-xxxx
+                            title="Please enter a valid phone number (xxx-xxx-xxxx)."
                             required
                         />
                     </div>

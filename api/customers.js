@@ -13,6 +13,23 @@ router.post('/', async (req, res) => {
   }
 });
 
+// POST - Customer login
+router.post("/login", async (req, res) => {
+  console.log("Login route hit");  
+  const { email, password } = req.body;
+  try {
+      const customer = await getCustomerByLogin(email, password);
+      if (customer) {
+          res.status(200).json({ message: "Sign-in successful", customer });
+      } else {
+          res.status(401).json({ error: "Invalid email or password" });
+      }
+  } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 // GET - Fetch all customers
 router.get('/', async (req, res) => {
   try {

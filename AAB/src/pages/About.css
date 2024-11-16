@@ -7,7 +7,7 @@ body {
   
   .section-white {
     background-color: #ffffff;
-    padding: 60px 20px;
+    padding: 30px 20px;
   }
   
   .container {
@@ -26,28 +26,31 @@ body {
   /* Section Title */
   .section-title {
     font-size: 2.5rem;
-    margin-bottom: 30px;
     color: #333;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
     text-align: center;
+    margin-bottom: 15px; 
   }
   
   .section-subtitle {
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #6b6a6a;
   }
   
   /* Team Item */
   .team-item {
     background: #dbdbdbb9;
     border-radius: 8px;
-    padding: 5px;
+    padding: 15px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0 15px 30px;
     transition: transform 0.2s;
-    height: 450px;
+    height: 420px;
     width: 100%;
     max-width: 250px;
     display: flex;
@@ -60,19 +63,19 @@ body {
   .team-item:hover {
     transform: translateY(-5px);
   }
-  
+
   /* Image */
   .team-item img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%; /* Circular image */
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
     margin-bottom: 5px;
-    border: 4px solid #9ed1d7; /* Border color */
   }
   
   /* Team Info */
   .team-info {
     margin-top: 5px; 
+    margin-bottom: 5px;
     padding: 5px;
     word-wrap: break-word;
     overflow: hidden;
@@ -82,42 +85,24 @@ body {
     justify-content: flex-start;
 }
 
-  
-  .team-info h3 {
-    font-size: 1.2rem;
-    margin: 5px 0;
-  }
+.section-white h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #333;
+  text-align: center;
+}
   
   .team-info p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
     color: #888;
     margin: 2px 0;
     word-wrap: break-word;
-
   }
-  
-  /* Social Icons */
-  .team-icon {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .team-icon li {
-    margin: 0 10px;
-  }
-  
-  .team-icon a {
-    text-decoration: none;
-    color: #4caf50; /* Adjust link color */
-    font-size: 1.5rem;
-    transition: color 0.2s;
-  }
-  
-  .team-icon a:hover {
-    color: #333; /* Color on hover */
-  }
-
 
   @media (max-width: 992px) {
     .row {

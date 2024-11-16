@@ -13,7 +13,9 @@ const getCustomers = async () => {
 //get a customer by login
 const getCustomerByLogin = async (email, password) => {
     try {
+        console.log("Searching for customer with email:", email, "and password:", password);  // Log email and password
         const customer = await Customer.findOne({ email, password });
+        console.log("Customer found:", customer);  // Log the result
         return customer;
     } catch (error) {
         throw new Error("Failed to fetch customer");
