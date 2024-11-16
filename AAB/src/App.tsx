@@ -11,6 +11,8 @@ import './App.css'
 import Register from './pages/Register';
 import Checkout from './pages/Checkout'; 
 import SignIn from './pages/SignIn';
+import ForgotPassword from './pages/forgotPassword'; 
+import ResetPassword from './pages/ResetPassword';
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/Checkout" element={<Checkout />} /> 
           <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>
       </Router>
     </CartProvider>

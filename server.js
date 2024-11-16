@@ -28,6 +28,8 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 const customerRoutes = require('./routes/customerRoutes.js');
 const productRoutes = require('./routes/productRoutes.js');
 const orderRoutes = require('./routes/orderRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
+
 
 
 // Use routes ()
@@ -41,6 +43,7 @@ const orderRoutes = require('./routes/orderRoutes.js');
 app.use("/api/customers", customerRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use('/api/auth', authRoutes);
 
 // Start the Node + Express server on port 5000
 const PORT = process.env.PORT || 5000;
