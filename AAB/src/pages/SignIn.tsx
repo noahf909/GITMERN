@@ -82,6 +82,10 @@ const SignIn: React.FC = () => {
                             Don't have an account?{' '}
                             <a href="/Register" className="signup-link">Sign up</a>.
                         </p>
+                        <p>
+                            Forgot your password?{' '}
+                            <a href="/forgotPassword" className="signup-link">Forgot Password</a>
+                        </p>
                     </div>
                 </form>
             </div>
