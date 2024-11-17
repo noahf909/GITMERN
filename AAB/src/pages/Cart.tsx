@@ -9,11 +9,6 @@ function Cart() {
   //constant to navigate to checkout page 
   const navigate = useNavigate();
 
-  //function to navigate to checkout
-  const handleCheckout = () => {
-    navigate('/checkout');
-  };
-
   // Calculate the subtotal and total item count by iterating through the cart items
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const totalItems = cartItems.reduce((count, item) => count + item.quantity, 0);
