@@ -11,16 +11,14 @@ import './App.css'
 import Register from './pages/Register';
 import Checkout from './pages/Checkout'; 
 import SignIn from './pages/SignIn';
-import ForgotPassword from './pages/forgotPassword'; 
-import ResetPassword from './pages/ResetPassword';
-import Footer from './components/Footer'
+import { UserProvider } from './context/UserContext'; 
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
-    // Wrap the entire app in CartProvider to provide cart data across ALL components 
-    <CartProvider>
-      <Router>
-        <div className="App">
+    <UserProvider>
+      <CartProvider>
+        <Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -31,13 +29,11 @@ const App = () => {
             <Route path="/Register" element={<Register />} />
             <Route path="/Checkout" element={<Checkout />} /> 
             <Route path="/SignIn" element={<SignIn />} />
-            <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-        </Routes>
-        </div>
-        <Footer />
-      </Router>
-    </CartProvider>
+            <Route path="/Profile" element={<Profile />} />
+          </Routes>
+        </Router>
+      </CartProvider>
+    </UserProvider>
   );
 };
 export default App

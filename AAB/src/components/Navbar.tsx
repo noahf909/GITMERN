@@ -1,12 +1,14 @@
 import './Navbar.css'; 
 import cart from '../assets/cart.png';
-import user from '../assets/user.png';
+import ProfileIcon from '../assets/ProfileIcon.png';
 
 import { useCart } from '../context/CartContext'; 
+import { useUser } from '../context/UserContext';  
 
 const Navbar = () => {
     
     const { cartCount } = useCart(); // Access cartCount from CartContext
+    const { user } = useUser();  
 
     return (
         <nav className = "nav">
@@ -25,8 +27,8 @@ const Navbar = () => {
                     </a>
                 </li>
                 <li>
-                    <a href="/Register" className = "user-link">
-                        <img src={user} alt="User" className="user-icon"/>
+                    <a href={user ? "/Profile" : "/Register"} className="user-link">
+                        <img src={ProfileIcon} alt="User" className="user-icon"/>
                     </a>
                 </li>
             </ul>
