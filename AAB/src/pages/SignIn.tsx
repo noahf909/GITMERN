@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
             const data = await response.json();
             console.log('Sign-in successful:', data);
             setError(''); // Clear any previous error
-            setUser({ email: data.email }); // Set user data in context
+            setUser({  id: data.customer._id, email: data.customer.email }); // Set user email and Id!
             navigate('/'); // Redirect to home page
 
         } catch (err) {

@@ -35,16 +35,39 @@ const getOrdersByCustomer = async (customerId) => {
 //add a new order
 const addOrder = async (order) => {
     try {
-        const newOrder = new Order(order);
+        // Create the new order
+        const newOrder = new Order({
+            products: order.products.map((p) => ({
+                product: p.product,
+                size: p.size,
+                quantity: p.quantity,
+            })),
+            total: order.total,
+            address: order.address,
+            customer: order.customer || null, // Handle guest orders by setting customer to null
+            deliveryTime: order.deliveryTime || null, // Optional delivery time
+        });
+
+        // Save the new order to the database
         await newOrder.save();
-        //add the order to the customer's list of orders
-        const customer = await Customer.findById(order.customer);
-        customer.orders.push(newOrder);
+
+        // If the customer is logged in, associate the order with the customer
+        if (order.customer) {
+            const customer = await Customer.findById(order.customer);
+            if (!customer) {
+                throw new Error("Customer not found");
+            }
+            customer.orders.push(newOrder._id); // Add the order ID to the customer's list of orders
+            await customer.save(); // Save the updated customer
+        }
+
         return newOrder;
     } catch (error) {
+        console.error("Error adding order:", error.message);
         throw new Error("Failed to add order");
     }
 };
+
 
 //update an order by id
 const updateOrder = async (id, order) => {

@@ -36,11 +36,11 @@ const sendForgotPasswordEmail = async (req, res) => {
             { expiresIn: '1h' }                 // Token expiry
         );
 
-        // Email content
+        // Email content; update with website url
         const emailContent = `
             <h1>Password Reset Request</h1>
             <p>Click the link below to reset your password:</p>
-            <a href="http://localhost:5173/reset-password/${resetToken}">Reset Password</a>
+            <a href="http://www.aab.run/reset-password/${resetToken}">Reset Password</a>
             <p>If you did not request this, please ignore this email.</p>
         `;
 
