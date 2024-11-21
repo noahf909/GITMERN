@@ -1,6 +1,7 @@
 import React, { createContext, useState, ReactNode, useContext, useEffect } from 'react';
 
 interface User {
+    name: string; //include customer name  
     id: string; //we need customer id
     email: string;
 }

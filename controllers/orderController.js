@@ -1,5 +1,7 @@
 const Order = require("../models/Order");
 const Customer = require("../models/Customer");
+const Product = require("../models/Product"); // Adjust the path to your Product model
+
 
 //get all orders
 const getOrders = async () => {
@@ -22,15 +24,37 @@ const getOrderById = async (id) => {
     }
 };
 
-//get all orders by customer id
+//get all orders by customer id (including details)
 const getOrdersByCustomer = async (customerId) => {
     try {
         const orders = await Order.find({ customer: customerId });
-        return orders;
+
+        const ordersWithProductDetails = await Promise.all(
+            orders.map(async (order) => {
+                const detailedProducts = await Promise.all(
+                    order.products.map(async (item) => {
+                        const productDetails = await Product.findOne({ _id: item.product });
+                        return {
+                            ...item.toObject(),
+                            productDetails, // Attach product details here
+                        };
+                    })
+                );
+
+                return {
+                    ...order.toObject(),
+                    products: detailedProducts,
+                };
+            })
+        );
+
+        return ordersWithProductDetails;
     } catch (error) {
+        console.error("Error fetching orders by customer:", error.message);
         throw new Error("Failed to fetch orders");
     }
 };
+
 
 //add a new order
 const addOrder = async (order) => {
