@@ -21,5 +21,9 @@
         "nodejs-nodemailer-outlook": "^1.2.4",
         "nodemon": "^3.1.7",
         "stripe": "^17.4.0"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^7.0.0"
     }
 }

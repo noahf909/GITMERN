@@ -78,6 +78,9 @@ function CheckoutForm() {
         return;
     }
 
+    // Calculate the total amount in cents
+    const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0) * 100; // Convert to cents
+
     setLoading(true);
 
     try {
@@ -85,7 +88,7 @@ function CheckoutForm() {
         const response = await fetch('/api/stripe/create-payment-intent', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amount: 10000 }), // Example: 100.00 USD in cents
+            body: JSON.stringify({ amount: totalAmount }), // Example: 100.00 USD in cents
         });
         const { clientSecret } = await response.json();
 
@@ -130,7 +133,7 @@ function CheckoutForm() {
                     size: item.size,
                     quantity: item.quantity,
                 })),
-                total: cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
+                total: totalAmount/ 100,
                 address: `${deliveryAddress.addressLine1}, ${deliveryAddress.addressLine2}, ${deliveryAddress.city}, ${deliveryAddress.state}, ${deliveryAddress.postalCode}, ${deliveryAddress.country}`,
             }),
         });
