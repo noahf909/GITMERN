@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%; /* Ensure the body and html take up the full height */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f2f5;
+    flex-direction: column;
+    min-height: 100%; /* Ensure body stretches full height */
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%; /* Ensure this container takes up at least the full height */
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column; /* Aligns form elements properly */
+}
+
+.signup-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.signup-form h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.signup-form .error, .signup-form .success {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.signup-form .success {
+    color: #4CAF50;
+}
+
+.signup-form .error {
+    color: #f44336;
+}
+
+.signup-form form div {
+    margin-bottom: 1.2rem; /* Adjusted for more space */
+    text-align: left;
+}
+
+.signup-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.signup-form input[type="password"] {
+    /* Optional: Style password inputs separately if needed */
+    font-family: 'Courier New', monospace;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    background-color: #9ed1d7;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-form button:hover {
+    background-color: #9ed1d7ce;
+}
+
+/* Additional spacing for confirm password field */
+.signup-form input[type="password"] {
+    margin-bottom: 1.2rem; /* Adds some space after the confirm password field */
+}
+
+.signin-link {
+    text-decoration: underline;
+}

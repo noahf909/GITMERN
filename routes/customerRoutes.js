@@ -15,14 +15,30 @@ router.get("/", async (req, res) => {
 });
 
 //get a customer by login
-router.get("/:email/:password", async (req, res) => {
+// router.get("/:email/:password", async (req, res) => {
+//     try {
+//         const customer = await getCustomerByLogin(req.params.email, req.params.password);
+//         res.send(customer);
+//     } catch (error) {
+//         res.status(500).send(error.message);
+//     }
+// });
+
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body; // Get email and password from the request body
     try {
-        const customer = await getCustomerByLogin(req.params.email, req.params.password);
-        res.send(customer);
+        // Call the controller function to check if the customer exists with the provided credentials
+        const customer = await getCustomerByLogin(email, password);
+  
+        if (customer) {
+            res.status(200).json({ message: "Sign-in successful", customer });
+        } else {
+            res.status(401).json({ error: "Invalid email or password" });
+        }
     } catch (error) {
-        res.status(500).send(error.message);
+        res.status(500).json({ error: "Internal server error" });
     }
-});
+  });
 
 //add a new customer
 router.post("/", async (req, res) => {
@@ -63,5 +79,8 @@ router.delete("/:id", async (req, res) => {
         res.status(500).send(error.message);
     }
 });
+
+// Post get customer by login
+
 
 module.exports = router;

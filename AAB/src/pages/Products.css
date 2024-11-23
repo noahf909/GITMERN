@@ -1,0 +1,103 @@
+/* Products grid layout */
+.products-list {
+    display: grid; /* Creates a grid layout */
+    grid-template-columns: repeat(3, minmax(300px, 3fr)); /* Makes responsive columns, each card will be at least 200px wide */
+    gap: 20px; /* Adds space between each product card */
+    padding: 20px; /* Adds padding around the entire grid */
+    /* To increase or decrease the minimum width of each card, change the 200px value in minmax(200px, 1fr) */
+}
+
+/* Product card styling */
+.product-card {
+    border: 1px solid #e6e6e6; /* Adds a light border around each card */
+    border-radius: 8px; /* Rounds the corners of each card */
+    overflow: hidden; /* Ensures content doesn’t overflow outside the card */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    background-color: #fff; /* Sets background color of the card to white */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    /* To increase the overall size of each card, increase the width in the .products-list grid layout */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Slightly raises the card on hover */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Increases shadow intensity on hover for a lift effect */
+}
+
+/* Image container */
+.image-container {
+    position: relative; /* Allows child elements to be positioned absolutely */
+    width: 100%; /* Takes full width of the card */
+    padding-top: 120%; /* Keeps the container square by making height equal to width */
+    overflow: hidden; /* Ensures images don’t overflow outside the container */
+    background-color: #f9f9f9; /* Sets background color behind images */
+}
+
+/* Product images */
+.product-image {
+    position: absolute; /* Allows positioning images within the container */
+    top: 0; /* Aligns image to the top */
+    left: 0; /* Aligns image to the left */
+    width: 100%; /* Sets image width to 100% of container */
+    height: 100%; /* Sets image height to 100% of container */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition when switching images */
+}
+
+.front-image {
+    opacity: 1; /* Default visibility for the front image */
+}
+
+.back-image {
+    opacity: 0; /* Hides the back image initially */
+}
+
+.product-card:hover .front-image {
+    opacity: 0; /* Hides the front image on hover */
+}
+
+.product-card:hover .back-image {
+    opacity: 1; /* Reveals the back image on hover */
+}
+
+/* Badge styling */
+.badge {
+    position: absolute; /* Positions the badge within the image container */
+    top: 10px; /* Positions the badge 10px from the top */
+    left: 10px; /* Positions the badge 10px from the left */
+    background-color: #ff5a5f; /* Sets badge background color */
+    color: #fff; /* Sets badge text color */
+    padding: 5px 10px; /* Adds padding around the badge text */
+    font-size: 0.75rem; /* Sets font size of the badge */
+    font-weight: bold; /* Makes badge text bold */
+    text-transform: uppercase; /* Makes badge text uppercase */
+    border-radius: 3px; /* Rounds the corners of the badge */
+    /* To change badge position, adjust the top and left values */
+}
+
+/* Product details */
+.product-details {
+    padding: 15px; /* Adds padding inside the details section */
+    text-align: left; /* Aligns text to the left */
+}
+
+.product-details h2 {
+    font-size: 1rem; /* Sets font size of the product name */
+    font-weight: 600; /* Makes product name text bold */
+    color: #333; /* Sets color of the product name */
+    margin: 10px 0 5px; /* Adds space above and below the product name */
+    /* To increase the font size, change 1rem to a larger value */
+}
+
+.product-details .price {
+    font-size: 1rem; /* Sets font size of the price */
+    font-weight: 600; /* Makes price text bold */
+    color: #333; /* Sets color of the price text */
+    margin-top: 5px; /* Adds space above the price */
+    /* To make the price text larger, increase the font size here */
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}

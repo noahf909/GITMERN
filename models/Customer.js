@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const customerSchema = new mongoose.Schema({
   name: String,
   email: String,
-  address: String,
+  //address: String,
   phone: String,
   password: String,
   //list of orders made by the customer
