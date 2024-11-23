@@ -1,6 +1,7 @@
 import './SignIn.css'; 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext'; // Import useUser
 
 interface SignInData {
     email: string;
@@ -15,12 +16,13 @@ const SignIn: React.FC = () => {
 
     const [error, setError] = useState<string>('');
     const navigate = useNavigate(); // Hook to navigate to different pages
+    const { setUser } = useUser(); // Access setUser from context
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    
+
     const handleSubmit = async (e: FormEvent): Promise<void> => {
         e.preventDefault();
         console.log("Form data:", formData);
@@ -40,6 +42,7 @@ const SignIn: React.FC = () => {
             const data = await response.json();
             console.log('Sign-in successful:', data);
             setError(''); // Clear any previous error
+            setUser({  id: data.customer._id, name: data.customer.name, email: data.customer.email }); // Set user id, name, and email!
             navigate('/'); // Redirect to home page
 
         } catch (err) {
@@ -47,6 +50,7 @@ const SignIn: React.FC = () => {
             setError('Invalid email or password. Please try again.');
         }
     };
+
 
     return (
         <div className="signin-container">
@@ -81,6 +85,10 @@ const SignIn: React.FC = () => {
                         <p>
                             Don't have an account?{' '}
                             <a href="/Register" className="signup-link">Sign up</a>.
+                        </p>
+                        <p>
+                            Forgot your password?{' '}
+                            <a href="/forgotPassword" className="signup-link">Forgot Password</a>
                         </p>
                     </div>
                 </form>

@@ -80,7 +80,7 @@ const ProductDetail = () => {
             price: product!.price,
             size: selectedSize,
             frontImageUrl: product!.frontImageUrl,
-            quantity: 1
+            quantity
         };
         console.log('Item to add:', itemToAdd);
         addToCart(itemToAdd); 

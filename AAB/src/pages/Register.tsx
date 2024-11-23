@@ -61,7 +61,7 @@ const SignUp: React.FC = () => {
             }
 
             const data = await response.json();
-            console.log('Account created successfully:', data);
+            console.log('Account created successfully:', data);            
             setError(''); // Clear any previous error
             setSuccess(true);
             
@@ -79,6 +79,8 @@ const SignUp: React.FC = () => {
             setSuccess(false);
         }
     };
+
+     {/*FUNCTION FOR EMAIL CONFIRMATION THAT ACCOUNT WAS CREATED */}
 
     return (
         <div className="signup-container">

@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   name: String,
   price: Number,
   description: String,
-  quantity: Number,
+  quantity: Number, //Quantity should be reflected via sizes only. However, removing this will likely cause issues in other files
   frontImageUrl: String,
   backImageUrl: String,
   sizes: [

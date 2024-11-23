@@ -1,0 +1,107 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f2f5;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.form-card h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.form-card .error, .form-card .success {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.form-card .success {
+    color: #4CAF50;
+}
+
+.form-card .error {
+    color: #f44336;
+}
+
+.form-card form div {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.form-card label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-card input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-card button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    background-color: #9ed1d7;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-card button:hover {
+    background-color: #9ed1d7ce;
+}
+
+.link {
+    text-decoration: underline;
+    color: #007BFF;
+}
+
+.link:hover {
+    color: #0056b3;
+}

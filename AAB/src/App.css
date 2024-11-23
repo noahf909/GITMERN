@@ -9,3 +9,23 @@ html, body, #root {
   width: 100%;
 }
 
+.App {
+  flex-direction: column;
+  min-height: 100vh; /* Ensure that the app stretches to fill at least 100% of the viewport */
+  min-width: 100vh;
+}
+
+.App-main {
+  flex: 1; /* This allows the main content to take up all available space */
+  padding: 20px;
+  width: 100%; /* Ensures the main content takes up full width */
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+}

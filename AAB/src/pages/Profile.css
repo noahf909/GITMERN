@@ -1,0 +1,74 @@
+.profile-container {
+    padding: 20px;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.order-products {
+    display: flex;
+    flex-wrap: wrap; /* Wrap products to the next line if necessary */
+    gap: 15px; /* Add spacing */
+}
+
+.product-item {
+    margin-top: 10px;
+    padding: 15px;
+    width: 850px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.product-item .product-image {
+    width: 120px !important;
+    margin-top: 12px;
+    height: 120px !important;
+    align-items: right;
+    display: flex;
+    margin-left: 700px;
+    object-fit: cover;
+    border-radius: 8px;
+   /* Aligns image with text */
+}
+
+.product-details {
+    flex-grow: 1; /* Take up remaining space */
+}
+
+.product-details p {
+    margin: 5px 0; /* Add some spacing between text lines */
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.signout-btn {
+    display: block;
+    margin: 20px auto; /* Center the button horizontally */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signout-btn:hover {
+    background-color: #0056b3;
+}
