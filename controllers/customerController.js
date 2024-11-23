@@ -25,7 +25,11 @@ const getCustomerByLogin = async (email, password) => {
 //add a new customer
 const addCustomer = async (customer) => {
     try {
-        const newCustomer = new Customer(customer);
+        // Ensure the 'orders' field is initialized as an empty array
+        const newCustomer = new Customer({
+            ...customer, // Spread the customer fields
+            orders: [],  // Explicitly initialize the 'orders' field as an empty array
+        });
         await newCustomer.save();
         return newCustomer;
     } catch (error) {
