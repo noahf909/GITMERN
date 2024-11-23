@@ -1,6 +1,6 @@
 import './Navbar.css'; 
 import cart from '../assets/cart.png';
-import ProfileIcon from '../assets/ProfileIcon.png';
+import ProfileIcon from '../assets/profileIcon.png';
 
 import { useCart } from '../context/CartContext'; 
 import { useUser } from '../context/UserContext';  
