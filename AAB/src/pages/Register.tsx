@@ -47,24 +47,34 @@ const SignUp: React.FC = () => {
         dataToSend.email.toLowerCase();
 
         try {
-            const response = await fetch('/api/customers', {
+            //send verification email
+            const emailVerificationResponse = await fetch('/api/auth/email-verification', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(dataToSend) // Send form data excluding confirmPassword
-            });
+                body: JSON.stringify(dataToSend),
+            }); 
 
-            if (!response.ok) {
-                // If the response is not successful, throw an error
-                throw new Error(`Error: ${response.status}`);
+            if (emailVerificationResponse.status === 409) {
+                // User already exists
+                setError('');
+                setSuccess(false);
+                setError('User already exists. Please log in.');
+                return;
             }
 
-            const data = await response.json();
-            console.log('Account created successfully:', data);            
+            if (!emailVerificationResponse.ok) {
+                throw new Error(`Email verification failed: ${emailVerificationResponse.status}`); 
+            }
+
+            const emailData = await emailVerificationResponse.json(); 
+            console.log('Verification email sent:', emailData); 
+            
+
             setError(''); // Clear any previous error
             setSuccess(true);
-            
+
             setFormData({
                 name: '',
                 email: '',
@@ -74,20 +84,18 @@ const SignUp: React.FC = () => {
             });
 
         } catch (err) {
-            console.error('Error creating account:', err);
+            console.error('Error sending verification email:', err);
             setError('Error creating account. Please try again.');
             setSuccess(false);
         }
     };
-
-     {/*FUNCTION FOR EMAIL CONFIRMATION THAT ACCOUNT WAS CREATED */}
-
+      
     return (
         <div className="signup-container">
             <div className="signup-form">
                 <h2>Create an Account</h2>
                 {error && <p className="error">{error}</p>}
-                {success && <p className="success">Account created successfully! Please Sign In!</p>}
+                {success && <p className="success">Email Verification sent! Please check your email to verify.</p>}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="name">Full Name</label>
