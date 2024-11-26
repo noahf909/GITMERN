@@ -3,10 +3,16 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/Customer'); // Replace with your user model
 //const bcrypt = require('bcryptjs');
 const router = express.Router();
-const { sendForgotPasswordEmail } = require('../controllers/authController'); 
+const { sendForgotPasswordEmail, emailVerification, verifyEmail } = require('../controllers/authController'); 
+
+//endpoint for sending the verification email
+router.post('/email-verification', emailVerification);
+
+//endpoint for verifying user and registering the user
+router.post('/verify-email/:token', verifyEmail);
 
 // Forgot Password Route
-router.post('/forgot-Password', sendForgotPasswordEmail);
+router.post('/forgot-password', sendForgotPasswordEmail);
 
 // Password reset route
 router.post('/reset-password/:token', async (req, res) => {

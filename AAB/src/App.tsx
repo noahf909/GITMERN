@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout';
 import SignIn from './pages/SignIn';
 import { UserProvider } from './context/UserContext'; 
 import Profile from './pages/Profile';
+import VerifyEmail from './pages/verifyEmail';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/About" element={<About />} />
             <Route path="/Cart" element={<Cart />} />
             <Route path="/Register" element={<Register />} />
+            <Route path="/verify-email/:token" element={<VerifyEmail />} />
             <Route path="/Checkout" element={<Checkout />} /> 
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/Profile" element={<Profile />} />
