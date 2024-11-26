@@ -61,7 +61,6 @@ const VerifyEmail: React.FC = () => {
                 throw new Error('Account creation failed.');
             }
 
-            const data = await response.json();
             setMessage('Account created successfully! Redirecting to login...');
             setError('');
             setTimeout(() => navigate('/SignIn'), 3000);
