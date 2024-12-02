@@ -125,3 +125,26 @@
     font-size: 1.1em;
     color: #444;
 }
+
+.quantity-input {
+    margin-left: -68px; /* Move the input to the left */
+    margin-bottom: 15px;
+}
+
+/* Invalid quantity input styling */
+.quantity-input.invalid {
+    border: 1px solid #e74c3c; /* Red border */
+}
+
+/* Error message styling */
+.quantity-error {
+    color: #e74c3c; /* Red text */
+    font-size: 0.875rem; /* Slightly smaller font size */
+    margin-top: 5px;
+    margin-left: 10px; /* Shift the message to the right */
+    
+}
+
+button {
+    margin-left: 1px; /* Moves the button a tiny bit to the right */
+}

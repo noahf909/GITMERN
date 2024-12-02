@@ -1,17 +1,8 @@
-// Import useParams to get route parameters from the URL
 import { useParams } from 'react-router-dom';
-
-// Import React hooks for managing side effects and state
 import { useEffect, useState } from 'react';
+import { useCart } from '../context/CartContext';
+import './ProductDetail.css';
 
-// Import the CSS file for styling
-import './ProductDetail.css'; // Import the CSS file
-
-// Import useCart for accessing cart context
-import { useCart } from '../context/CartContext'; 
-
-
-// Define the Product interface to specify the structure of a product object
 interface Product {
     _id: string;
     name: string;
@@ -19,90 +10,73 @@ interface Product {
     description: string;
     frontImageUrl: string;
     backImageUrl: string;
-    sizes: {
-          size: string,
-          quantity: number,
-          _id: string
-    }[],
+    sizes: { size: string; quantity: number; _id: string }[];
 }
 
-
-
 const ProductDetail = () => {
-    // Extract the product ID from the URL parameters
     const { id } = useParams<{ id: string }>();
-
-    // Create a state variable for the product, initially set to null (no product loaded yet)
     const [product, setProduct] = useState<Product | null>(null);
-
-    // Create a state variable for the main image to display in the gallery
     const [mainImage, setMainImage] = useState<string>('');
+    const [selectedSize, setSelectedSize] = useState<string>('');
+    const [quantity, setQuantity] = useState<string>('1'); // Store quantity as string for easy input handling
+    const [invalidQuantity, setInvalidQuantity] = useState<boolean>(false); // Track invalid quantity
+    const { addToCart } = useCart();
 
-    // track selected size 
-    const [selectedSize, setSelectedSize] = useState<string>(''); 
-
-    // access addToCart from CartContext
-    const { addToCart } = useCart(); // Access addToCart from CartContext
-
-    const [quantity, setQuantity] = useState<number>(1);
-
-    // useEffect to fetch product details when the component loads or when the ID changes
     useEffect(() => {
-        // Define an async function to fetch product data from the server
         const fetchProduct = async () => {
-        try {
-            // Send a request to fetch product details using the product ID
-            const response = await fetch(`/api/products/${id}`);
-            
-            // Parse the response data into JSON format
-            const data = await response.json();
+            try {
+                const response = await fetch(`/api/products/${id}`);
+                const data = await response.json();
+                setProduct(data);
+                setMainImage(data.frontImageUrl);
+            } catch (error) {
+                console.error("Error fetching product:", error);
+            }
+        };
 
-            // Update the product state with fetched data
-            setProduct(data);
-
-            // Set the main image to the front image of the product initially
-            setMainImage(data.frontImageUrl);
-        } catch (error) {
-            // Log any errors that occur during fetching
-            console.error("Error fetching product:", error);
-        }
-    };
-
-        // Call the fetchProduct function to start fetching data
         fetchProduct();
-    }, [id]); // Dependency array with ID to re-run effect if ID changes
+    }, [id]);
 
     const handleAddToCart = () => {
-        
         const itemToAdd = {
             productId: product!._id,
             name: product!.name,
             price: product!.price,
             size: selectedSize,
             frontImageUrl: product!.frontImageUrl,
-            quantity
+            quantity: parseInt(quantity), // Parse quantity as a number for cart
         };
-        console.log('Item to add:', itemToAdd);
-        addToCart(itemToAdd); 
+        addToCart(itemToAdd);
     };
 
+    // Handle quantity input changes (allow any input, just store it as a string)
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuantity(e.target.value);
+        setInvalidQuantity(false); // Clear the error message as soon as the user starts typing
+    };
 
-    // Display a loading message if the product data is not yet loaded
+    // Validate and update the quantity when the input loses focus (onBlur)
+    const handleQuantityBlur = () => {
+        const parsedQuantity = parseInt(quantity);
+        if (isNaN(parsedQuantity) || parsedQuantity < 1 || parsedQuantity > 99) {
+            setInvalidQuantity(true);
+            setQuantity('1'); // Reset to 1 if invalid
+        }
+    };
+
+    // Display loading message if product data isn't loaded yet
     if (!product) return <p>Loading...</p>;
 
-     return (
+    return (
         <div className="product-detail">
-            {/* Image gallery with thumbnails and main image display */}
             <div className="image-gallery">
                 <div className="thumbnails">
-                    {/* Thumbnail for front image with click event to set it as the main image */}
                     <img
                         src={product.frontImageUrl}
                         alt={`${product.name} Front`}
                         onClick={() => setMainImage(product.frontImageUrl)}
                         className={mainImage === product.frontImageUrl ? 'active' : ''}
                     />
-                    {/* Thumbnail for back image with click event to set it as the main image */}
                     <img
                         src={product.backImageUrl}
                         alt={`${product.name} Back`}
@@ -111,21 +85,14 @@ const ProductDetail = () => {
                     />
                 </div>
                 <div className="main-image">
-                    {/* Main image display based on selected thumbnail */}
                     <img src={mainImage} alt={product.name} />
                 </div>
             </div>
             <div className="product-info">
-                {/* Display product name */}
                 <h1>{product.name}</h1>
-                
-                {/* Display product price, formatted to two decimal places */}
                 <p className="price">${product.price.toFixed(2)}</p>
-                
-                {/* Display product description */}
                 <p className="description">{product.description}</p>
-                
-                {/* Size selection dropdown */}
+
                 <label htmlFor="size-select" className="size-label">Select Size</label>
                 <select
                     id="size-select"
@@ -141,23 +108,26 @@ const ProductDetail = () => {
                     ))}
                 </select>
 
-                {/* Add to Cart button */}
-                <button onClick={handleAddToCart} disabled={!selectedSize}>
-                    Add to Cart
-                </button>
-
                 <p>
                     Quantity:{' '}
                     <input
-                        type="number"
-                        min="1"
-                        max="99"
+                        type="text"  // Allow any input, not restricted to number field
                         value={quantity}
-                        onChange={(e) => setQuantity(parseInt(e.target.value))}
-                        className="quantity-input"
+                        onChange={handleQuantityChange}  // Update quantity as the user types
+                        onBlur={handleQuantityBlur}  // Validate when the input loses focus
+                        className={`quantity-input ${invalidQuantity ? 'invalid' : ''}`}  // Apply invalid class if there's an error
                     />
+                    {invalidQuantity && (
+                        <span className="quantity-error">Invalid quantity. Please enter a value between 1 and 99.</span>
+                    )}
                 </p>
 
+                <button
+                    onClick={handleAddToCart}
+                    disabled={!selectedSize}  // Disable button if no size selected or quantity is invalid
+                >
+                    Add to Cart
+                </button>
             </div>
         </div>
     );

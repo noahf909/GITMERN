@@ -39,6 +39,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: relative;
 }
+
 .cart-item-image {
   width: 130px !important;
   height: 130px !important;
@@ -85,7 +86,7 @@
 .quantity-remove-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   margin-top: 10px;
 }
 
@@ -98,51 +99,80 @@
   text-align: center;
 }
 
-/* Price details styling */
-.price-details {
-  margin-top: 20px;
-  font-size: 1.1em;
-  font-weight: 500;
-  color: #333;
-  text-align: right;
-  padding-top: 15px;
-  border-top: 1px solid #ddd;
+/* Invalid quantity input styling */
+.quantity-input.invalid {
+  border: 1px solid #e74c3c; /* Red border */
 }
 
-/* Checkout button styling */
+/* Error message styling */
+.quantity-error {
+  color: #e74c3c; /* Red text */
+  font-size: 0.875rem; /* Slightly smaller font size */
+  margin-top: 5px;
+  margin-left: 10px; /* Shift the message to the right */
+}
+
+/* Price and checkout section */
+.price-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.total-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.remove-btn,
 .checkout-btn {
   width: 100%;
-  padding: 12px 0;
-  font-size: 1.1rem;
-  color: white;
-  background-color: #333;
+  padding: 12px;
+  font-size: 1rem;
   border: none;
-  cursor: pointer;
   border-radius: 5px;
-  text-align: center;
-  margin-top: 25px;
-  transition: background-color 0.3s ease;
-}
-
-.checkout-btn:hover {
-  background-color: #555;
-}
-
-/* Delete All button styling */
-.delete-all-btn {
-  width: 100%;
-  padding: 12px 0;
-  font-size: 1.1rem;
-  color: white;
-  background-color: #e74c3c;
-  border: none;
   cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
   margin-top: 20px;
-  transition: background-color 0.3s ease;
+}
+
+.remove-btn {
+  background-color: #f5f5f5;
+  color: #e74c3c;
+  font-weight: bold;
+  border: 2px solid #e74c3c;
+}
+
+.checkout-btn {
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+}
+
+.delete-all-btn {
+  background-color: #f5f5f5;
+  border: 2px solid #e74c3c;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .delete-all-btn:hover {
-  background-color: #c0392b;
+  background-color: #e74c3c;
+  color: white;
+}
+
+.checkout-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive styling for small screens */
+@media (max-width: 600px) {
+  .cart-item {
+    flex-direction: column;
+  }
+  .cart-item-image {
+    width: 100%;
+    height: auto;
+  }
 }

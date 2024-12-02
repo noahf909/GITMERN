@@ -10,11 +10,17 @@ function Cart() {
   // State to manage local quantities for all cart items
   const [localQuantities, setLocalQuantities] = useState(
     cartItems.reduce((acc, item) => {
-      
-      // Initialize state for each item's quantity
       acc[`${item.productId}-${item.size}`] = item.quantity.toString();
       return acc;
-    }, {} as Record<string, string>)  // Create a key-value pair for product ID and size
+    }, {} as Record<string, string>)
+  );
+
+  // State to track invalid quantities
+  const [invalidQuantities, setInvalidQuantities] = useState<Record<string, boolean>>(
+    cartItems.reduce((acc, item) => {
+      acc[`${item.productId}-${item.size}`] = false; // Initialize all to valid (false)
+      return acc;
+    }, {} as Record<string, boolean>)
   );
 
   // Calculate the subtotal (sum of price * quantity for all items)
@@ -43,8 +49,10 @@ function Cart() {
             : item // Keep other items unchanged
         )
       );
+      setInvalidQuantities((prev) => ({ ...prev, [id]: false })); // Reset invalid state
     } else {
-       // If invalid, reset to the original quantity
+      // If invalid, reset to the original quantity and set invalid state
+      setInvalidQuantities((prev) => ({ ...prev, [id]: true }));
       setLocalQuantities((prev) => ({
         ...prev,
         [id]: cartItems.find((item) => item.productId === productId && item.size === size)
@@ -60,7 +68,7 @@ function Cart() {
     );
   };
 
-   // Remove all items from the cart
+  // Remove all items from the cart
   const handleDeleteAll = () => {
     setCartItems([]);
   };
@@ -94,8 +102,11 @@ function Cart() {
                         onKeyDown={(e) => {
                           if (e.key === "Enter") handleQuantityBlur(id, item.productId, item.size);  // Commit changes on Enter key
                         }}
-                        className="quantity-input"
+                        className={`quantity-input ${invalidQuantities[id] ? 'invalid' : ''}`} // Apply invalid class if invalid
                       />
+                      {invalidQuantities[id] && (
+                        <span className="quantity-error">Invalid quantity. Please enter a value between 1 and 99.</span>
+                      )}
                     </p>
                   </div>
                   <button
