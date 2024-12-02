@@ -126,8 +126,9 @@
     color: #444;
 }
 
-.quantity-input {
-    margin-left: -68px; /* Move the input to the left */
+
+.quantity-input { 
+    /* Move the input to the left */
     margin-bottom: 15px;
 }
 
