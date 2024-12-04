@@ -6,10 +6,12 @@
     padding: 20px;
 }
 
-/* Image gallery container */
+/* Image gallery container - Make sure the images stay their normal size */
 .image-gallery {
     flex: 1;
-    min-width: 300px;
+    min-width: 300px;  /* Ensure the image container has a minimum width */
+    max-width: 500px;  /* Optionally set a max-width to prevent images from becoming too large */
+    padding-right: 20px;  /* Add some space between the images and the product info */
 }
 
 /* Thumbnails container */
@@ -37,14 +39,19 @@
 /* Main image display */
 .main-image img {
     width: 100%;
-    max-width: 500px;
+    max-width: 500px; /* Prevent images from expanding too large */
     object-fit: cover;
 }
 
-/* Product information container */
+/* Product information container with background box */
 .product-info {
     flex: 1;
     min-width: 300px;
+    background-color: #aacfcf; 
+    padding: 20px; 
+    border-radius: 12px; /* Round the corners for a modern look */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow for depth */
+    margin-top: 70px; /* Adds space between the product info and images */
 }
 
 /* Product name styling */
@@ -64,8 +71,9 @@
 .product-info .description {
     font-size: 1rem;
     line-height: 1.5;
+    margin-bottom: 15px; /* Add some space below the description */
 }
- 
+
 /* Style the sizing label */
 .size-label {
     display: block; /* Ensure the label is on a separate line */
@@ -117,19 +125,9 @@
     color: #333;
 }
 
-/* Style the label for a modern look */
-.size-label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-    color: #444;
-}
-
-
-.quantity-input { 
-    /* Move the input to the left */
-    margin-bottom: 15px;
+/* Quantity input styling */
+.quantity-input {
+    margin-bottom: 15px; /* Space between quantity input and next element */
 }
 
 /* Invalid quantity input styling */
@@ -143,7 +141,6 @@
     font-size: 0.875rem; /* Slightly smaller font size */
     margin-top: 5px;
     margin-left: 10px; /* Shift the message to the right */
-    
 }
 
 button {
