@@ -1,6 +1,6 @@
 # Average at Best – MERN Stack Clothing Shop (Fall 2024)
 
-**Average at Best** is a full-stack web application built with the MERN stack (MongoDB, Express.js, React, and Node.js), designed as a **proof of concept** for a friend’s clothing brand. The site simulates a functional online store where users can browse products, add them to a cart, and check out using the Stripe Developer API.
+**Average at Best** is a full-stack web application built using the MERN stack (MongoDB, Express.js, React, and Node.js). Designed as a **proof of concept** for a friend’s clothing brand, this project simulates a functional online store. Users can browse items, add them to a cart, and check out securely via the Stripe Developer API.
 
 ---
 
@@ -12,16 +12,11 @@
 - [Screenshots](#screenshots)
 - [Installation](#installation)
 - [Folder Structure](#folder-structure)
-- [Future Improvements](#future-improvements)
-- [License](#license)
-
 ---
 
 ## Overview
 
-"Average at Best" is a minimalistic yet functional e-commerce prototype that captures the spirit of a modern clothing brand. Built in Fall 2024, the site demonstrates core functionality expected in a production-grade store, including secure checkout via Stripe.
-
-Deployed on **DigitalOcean**, the app is hosted with a live backend and responsive frontend.
+"Average at Best" is a minimal, stylish e-commerce prototype built in Fall 2024. It demonstrates a modern clothing store experience with essential e-commerce functionality and is deployed on a **DigitalOcean Droplet**. Stripe handles payments in test mode, making it easy to simulate checkout without real transactions.
 
 ---
 
@@ -29,38 +24,38 @@ Deployed on **DigitalOcean**, the app is hosted with a live backend and responsi
 
 **Frontend:**
 - React
+- Vite
 
 **Backend:**
 - Node.js
 - Express.js
 
 **Database:**
-- MongoDB (with Mongoose)
+- MongoDB (via Mongoose)
 
 **Payments:**
 - Stripe Developer API (test mode)
 
 **Deployment:**
-- **DigitalOcean Droplet**
+- DigitalOcean Droplet (Ubuntu)
 - MongoDB Atlas
-- GitHub
+- GitHub for version control
 
 ---
 
 ## Features
 
-- Browse and view detailed product listings
-- Add/remove items from cart
-- View dynamic cart with real-time price updates
-- Checkout securely via Stripe (test mode)
-- Responsive and mobile-friendly UI
-- Basic error handling and validation
+- Product listing and detail view
+- Shopping cart (add/remove items)
+- Stripe checkout integration (test mode)
+- Responsive, mobile-friendly design
+- Modular and scalable codebase
 
 ---
 
 ## Screenshots
 
-> Add your screenshots to the `screenshots/` folder and update the links below.
+> Add your screenshots to the `screenshots/` folder in the root and update the links here.
 
 **Homepage**  
 ![Homepage](./screenshots/homepage.png)
@@ -68,7 +63,7 @@ Deployed on **DigitalOcean**, the app is hosted with a live backend and responsi
 **Cart Page**  
 ![Cart](./screenshots/cart.png)
 
-**Checkout Page (Stripe Integration)**  
+**Checkout Page**  
 ![Checkout](./screenshots/checkout.png)
 
 ---
@@ -78,21 +73,26 @@ Deployed on **DigitalOcean**, the app is hosted with a live backend and responsi
 ```bash
 # Clone the repository
 git clone https://github.com/noahf909/GITMERN.git
-cd average-at-best
+cd GITMERN
 
 # Install backend dependencies
 npm install
 
-# Move into the frontend directory
+# Start the backend server
+node server.js
+
+# In a new terminal, navigate to the frontend
 cd AAB
 
 # Install frontend dependencies
 npm install
 
-# run the backend 
-cd . 
-node server.js 
-
-# Run the frontend 
-cd AAB
+# Start the frontend
 npm run dev
+
+# make the following env in GITMERN
+
+# make the following env in AAB
+
+## Folder Structure 
+
