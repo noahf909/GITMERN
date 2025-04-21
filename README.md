@@ -77,22 +77,22 @@ Deployed on **DigitalOcean**, the app is hosted with a live backend and responsi
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/average-at-best.git
+git clone https://github.com/noahf909/GITMERN.git
 cd average-at-best
 
 # Install backend dependencies
 npm install
 
 # Move into the frontend directory
-cd frontend
+cd AAB
 
 # Install frontend dependencies
 npm install
 
 # run the backend 
-cd backend
+cd . 
 node server.js 
 
 # Run the frontend 
-cd frontend
+cd AAB
 npm run dev
