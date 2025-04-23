@@ -9,7 +9,7 @@
 - [Overview](#overview)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
-- [Screenshots](#screenshots)
+- [Presentation](#Presentation)
 - [Installation](#installation)
 - [Folder Structure](#folder-structure)
 ---
@@ -53,18 +53,8 @@
 
 ---
 
-## Screenshots
+## Presentation
 
-> Add your screenshots to the `screenshots/` folder in the root and update the links here.
-
-**Homepage**  
-![Homepage](./screenshots/homepage.png)
-
-**Cart Page**  
-![Cart](./screenshots/cart.png)
-
-**Checkout Page**  
-![Checkout](./screenshots/checkout.png)
 
 ---
 
@@ -90,9 +80,42 @@ npm install
 # Start the frontend
 npm run dev
 
-# make the following env in GITMERN
+# make an env in GITMERN and add the following
+MONGO_URI="mongodb+srv://noahFuhrman:kmfj7St9gL9sFQJ7@cluster0.xga6g.mongodb.net/"
+EMAIL=""
+EMAIL_PASSWORD=""
+JWT_SECRET=''
+STRIPE_SECRET_KEY=''
 
 # make the following env in AAB
+VITE_STRIPE_PUBLISHABLE_KEY=""
 
 ## Folder Structure 
-
+C:.
+|   .env
+|   .gitignore
+|   folder_structure.txt
+|   jest.config.js
+|   package-lock.json
+|   package.json
+|   README.md
+|   server.js
+|   
++---.github
+|   \---workflows
+|           ci.yml
+|           
++---AAB
+|   |   .env
+|   |   .gitignore
+|   |   eslint.config.js
+|   |   index.html
+|   |   package-lock.json
+|   |   package.json
+|   |   README.md
+|   |   tsconfig.app.json
+|   |   tsconfig.app.tsbuildinfo
+|   |   tsconfig.json
+|   |   tsconfig.node.json
+|   |   tsconfig.node.tsbuildinfo
+|   |   vite.config.ts
