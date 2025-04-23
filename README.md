@@ -9,10 +9,11 @@
 - [Overview](#overview)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
-- [Presentation](#Presentation)
+- [Presentation](#presentation)
 - [Installation](#installation)
 - [Folder Structure](#folder-structure)
-- [flutter extension](#flutter-extension)
+- [Flutter Extension](#flutter-extension)
+
 ---
 
 ## Overview
@@ -24,20 +25,25 @@
 ## Tech Stack
 
 **Frontend:**
+
 - React
 - Vite
 
 **Backend:**
+
 - Node.js
 - Express.js
 
 **Database:**
+
 - MongoDB (via Mongoose)
 
 **Payments:**
+
 - Stripe Developer API (test mode)
 
 **Deployment:**
+
 - DigitalOcean Droplet (Ubuntu)
 - MongoDB Atlas
 - GitHub for version control
@@ -55,6 +61,7 @@
 ---
 
 ## Presentation
+
 [📄 View the full PDF](docs/Presentation.pdf)
 
 ---
@@ -71,8 +78,12 @@ npm install
 
 # Start the backend server
 node server.js
+```
 
-# In a new terminal, navigate to the frontend
+In a new terminal:
+
+```bash
+# Navigate to the frontend
 cd AAB
 
 # Install frontend dependencies
@@ -80,46 +91,64 @@ npm install
 
 # Start the frontend
 npm run dev
+```
 
-# make an env in GITMERN and add the following
-MONGO_URI="mongodb+srv://noahFuhrman:kmfj7St9gL9sFQJ7@cluster0.xga6g.mongodb.net/"
-EMAIL=""
-EMAIL_PASSWORD=""
-JWT_SECRET=''
-STRIPE_SECRET_KEY=''
+### Environment Variables
 
-# make the following env in AAB
-VITE_STRIPE_PUBLISHABLE_KEY=""
+Create a `.env` file in the project root (`GITMERN/`) with:
 
-## Folder Structure 
-C:.
-|   .env
-|   .gitignore
-|   folder_structure.txt
-|   jest.config.js
-|   package-lock.json
-|   package.json
-|   README.md
-|   server.js
-|   
-+---.github
-|   \---workflows
-|           ci.yml
-|           
-+---AAB
-|   |   .env
-|   |   .gitignore
-|   |   eslint.config.js
-|   |   index.html
-|   |   package-lock.json
-|   |   package.json
-|   |   README.md
-|   |   tsconfig.app.json
-|   |   tsconfig.app.tsbuildinfo
-|   |   tsconfig.json
-|   |   tsconfig.node.json
-|   |   tsconfig.node.tsbuildinfo
-|   |   vite.config.ts
+```env
+MONGO_URI="mongodb+srv://<username>:<password>@cluster0.xga6g.mongodb.net/"
+EMAIL="<your_email>"
+EMAIL_PASSWORD="<your_email_password>"
+JWT_SECRET="<your_jwt_secret>"
+STRIPE_SECRET_KEY="<your_stripe_secret_key>"
+```
 
-# flutter extension
-https://github.com/noahf909/FlutterAAB
+And in the `AAB/` directory, create a `.env` file with:
+
+```env
+VITE_STRIPE_PUBLISHABLE_KEY="<your_stripe_publishable_key>"
+```
+
+---
+
+## Folder Structure
+
+```
+GITMERN/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── AAB/
+│   ├── .env
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   ├── tsconfig.app.json
+│   ├── tsconfig.app.tsbuildinfo
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── tsconfig.node.tsbuildinfo
+│   └── vite.config.ts
+├── .env
+├── .gitignore
+├── folder_structure.txt
+├── jest.config.js
+├── package-lock.json
+├── package.json
+├── README.md
+└── server.js
+```
+
+---
+
+## Flutter Extension
+
+Check out the companion Flutter extension for “Average at Best”:
+
+[https://github.com/noahf909/FlutterAAB](https://github.com/noahf909/FlutterAAB)
+
