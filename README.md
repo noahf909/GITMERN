@@ -54,7 +54,7 @@
 ---
 
 ## Presentation
-
+[📄 View the full PDF](docs/Presentation.pdf)
 
 ---
 
