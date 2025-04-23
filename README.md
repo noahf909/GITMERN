@@ -12,6 +12,7 @@
 - [Presentation](#Presentation)
 - [Installation](#installation)
 - [Folder Structure](#folder-structure)
+- [flutter extension](#flutter-extension)
 ---
 
 ## Overview
@@ -119,3 +120,6 @@ C:.
 |   |   tsconfig.node.json
 |   |   tsconfig.node.tsbuildinfo
 |   |   vite.config.ts
+
+# flutter extension
+https://github.com/noahf909/FlutterAAB
